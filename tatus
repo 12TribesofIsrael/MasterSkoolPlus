@@ -1,0 +1,6 @@
+[33m6597d02[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m ✨ Update: Dynamic URL support, improved CLI, updated docs and batch files
+[33mb287b36[m feat: Implement exhaustive, production-ready Skool scraper
+[33m28c4c32[m[33m ([m[1;31morigin/main[m[33m)[m Merge: Complete working Skool extractor with testing system and batch runner
+[33m6684049[m Complete Skool Content Extractor - 112 lessons + new content testing
+[33mdc71baf[m 📊 Updated README: 100% completion achieved - 86/86 lessons extracted successfully
+* [32mmain[m

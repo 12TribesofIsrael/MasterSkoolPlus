@@ -1,0 +1,97 @@
+{
+  "c154c12bfcba4c579656380319fec3d9": {
+    "title": "n8n",
+    "type": "section",
+    "path": "n8n",
+    "parent_path": "",
+    "children": []
+  },
+  "7d109c26ce3a4846a475ce16bc9679bc": {
+    "title": "AI Agent in n8n \ud83d\udccc",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "AI Agent in n8n \ud83d\udccc"
+    }
+  },
+  "e667d013dddd4bdfa7f167f66b2ebcc8": {
+    "title": "n8n Basics",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "n8n Basics"
+    }
+  },
+  "21bf72470a3f44789162f2a12ea444f7": {
+    "title": "Connect your Google credentials",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "Connect your Google credentials"
+    }
+  },
+  "f08bb63041f34e01ab30afb23067f9cd": {
+    "title": "Create a RAG System",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "title": "Create a RAG System"
+    }
+  },
+  "bb5833723f8f46b7b7db77dfd55cf3f2": {
+    "title": "AI Agent or Automation?",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "desc": "[v2][{\"type\":\"paragraph\"}]",
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "AI Agent or Automation?"
+    }
+  },
+  "e48181bc695e42e0987419baa3cd6a4b": {
+    "title": "Using Webhooks",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "Using Webhooks"
+    }
+  },
+  "2e0e50c923104f0693472f4c338724b2": {
+    "title": "Create Sub-Agents",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "Create Sub-Agents"
+    }
+  },
+  "64cf1afe5f2649e1b5aa31b1e1176fd5": {
+    "title": "How to solve problems?",
+    "type": "lesson",
+    "path": "n8n",
+    "parent_path": "n8n",
+    "metadata": {
+      "hasAccess": 1,
+      "resources": "[]",
+      "title": "How to solve problems?"
+    }
+  }
+}

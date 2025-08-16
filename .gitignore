@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.build/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+
+# OS/Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Project outputs
+Communities/
+cleanup_backups/
+restore_point_backup/
+chromedriver.log
+*.log
+
+# Selenium/WebDrivers
+chromedriver*
+.geckodriver*
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+
+# Node (if any example UIs)
+node_modules/
+
+# Misc
+*.bak
+*.tmp 
