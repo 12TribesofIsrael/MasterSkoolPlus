@@ -17,6 +17,14 @@ This project scrapes Skool classroom collections and saves each lesson’s conte
 pip install -r requirements.txt
 ```
 
+### Credentials (.env or prompts)
+- You can store your Skool credentials in a local `.env` file at the project root:
+  ```bash
+  SKOOL_EMAIL=you@example.com
+  SKOOL_PASSWORD=yourpassword
+  ```
+- Alternatively, pass them via flags (`--email` and `--password`) or use the Windows `.bat` launchers which prompt if unset.
+
 ### Primary script (multi‑lesson)
 - Script: `skool_content_extractor.py`
 - Behavior:
@@ -69,6 +77,8 @@ run_extractor.bat
 - ✅ **Multi-platform support** - YouTube, Vimeo, Loom, Wistia
 - ✅ **Prevents duplicate videos** - filters out cached/header videos
 - ✅ **Debug mode** - saves JSON data for troubleshooting
+- ✅ **Network log-based detection** - inspects Chrome performance logs to catch HLS/MP4 and oEmbed flows
+- ✅ **Clean URLs** - canonicalizes YouTube (incl. oEmbed) to `https://www.youtube.com/watch?v=<ID>`
 
 ### Wistia-only lessons (new fallback)
 - Some Skool lessons expose Wistia videos via Skool links like `?wvideo=ID` or class markers such as `wistia_async_{ID}` without an immediate iframe.
@@ -96,6 +106,8 @@ run_extractor.bat
   - Double‑check email/password (or omit flags to use defaults in script config)
   - Ensure your account has access to the community
   - If you encounter 2FA/CAPTCHA, try an interactive (non‑headless) run and stay logged in
+- Non‑interactive runs:
+  - To skip pre‑run cleanup prompts in the single‑lesson script, set `SKIP_CLEANUP_PROMPT=1` in your environment before running.
 - Chrome/driver issues:
   - Ensure Chrome is installed and up to date
   - Re‑run `pip install -r requirements.txt`
@@ -161,8 +173,11 @@ ffmpeg -i "https://fast.wistia.com/embed/medias/3g1szfgexr.m3u8" -c copy -bsf:a 
 
 #### `extract_single_with_youtube_fix.py`
 - **Purpose**: Extract one specific lesson with enhanced video detection
-- **Features**: Hierarchical structure, single lesson focus
-- **Usage**: Modify URL in script and run
+- **Features**: Hierarchical structure, always runs all detection methods (safe click, two-step click, network logs, legacy), saves canonical video URL
+- **Usage**:
+  ```bash
+  python extract_single_with_youtube_fix.py "<LESSON_URL>" [--download-video]
+  ```
 - **When to use**: Testing or extracting just one lesson
 
 ### 🔧 **Legacy/Alternative Scripts**
