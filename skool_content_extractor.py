@@ -1084,8 +1084,13 @@ def clear_browser_storage_bulk(driver):
         print(f"⚠️ State isolation error: {e}")
 
 def login_to_skool(driver, email, password):
-    """Enhanced login function with multiple fallbacks"""
+    """Enhanced login to Skool.com with anti-detection measures"""
     try:
+        # Use the enhanced login function from the browser manager
+        from skool_modules.browser_manager import login_to_skool as enhanced_login
+        return enhanced_login(driver, email, password)
+    except ImportError:
+        # Fallback to original login method if modules not available
         print("🔐 Navigating to Skool login page...")
         driver.get("https://www.skool.com/login")
         

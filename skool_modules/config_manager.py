@@ -28,7 +28,7 @@ class ConfigManager:
         self.config.update({
             'SKOOL_EMAIL': os.getenv('SKOOL_EMAIL', ''),
             'SKOOL_PASSWORD': os.getenv('SKOOL_PASSWORD', ''),
-            'SKOOL_BASE_URL': os.getenv('SKOOL_BASE_URL', 'https://app.skool.com'),
+            'SKOOL_BASE_URL': os.getenv('SKOOL_BASE_URL', 'https://www.skool.com'),
             'DOWNLOAD_VIDEOS': os.getenv('DOWNLOAD_VIDEOS', 'false').lower() == 'true',
             'HEADLESS_MODE': os.getenv('HEADLESS_MODE', 'false').lower() == 'true',
             'BROWSER_TIMEOUT': int(os.getenv('BROWSER_TIMEOUT', '30')),

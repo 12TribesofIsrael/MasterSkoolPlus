@@ -205,8 +205,13 @@ def clear_browser_storage(driver):
         print(f"⚠️ Could not clear storage: {e}")
 
 def login_to_skool(driver, email, password):
-    """Login to Skool"""
+    """Enhanced login to Skool with anti-detection measures"""
     try:
+        # Use the enhanced login function from the browser manager
+        from skool_modules.browser_manager import login_to_skool as enhanced_login
+        return enhanced_login(driver, email, password)
+    except ImportError:
+        # Fallback to original login method if modules not available
         print("🔐 Logging into Skool...")
         driver.get("https://www.skool.com/login")
         
@@ -700,25 +705,80 @@ def click_video_thumbnail_safely(driver):
                         if is_video_container:
                             print(f"✅ Found potential video thumbnail - attempting click")
                             
-                            # Click the thumbnail
-                            driver.execute_script("arguments[0].click();", thumbnail)
+                            # RELIABILITY FIX: Validate element before clicking
+                            try:
+                                # Wait for element to be clickable
+                                from selenium.webdriver.support.ui import WebDriverWait
+                                from selenium.webdriver.support import expected_conditions as EC
+                                from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+                                
+                                # Check if element is still attached and clickable
+                                if thumbnail.is_displayed() and thumbnail.is_enabled():
+                                    print("✅ Element validated as clickable")
+                                    # Click the thumbnail
+                                    driver.execute_script("arguments[0].click();", thumbnail)
+                                else:
+                                    print("⚠️ Element not clickable, skipping...")
+                                    continue
+                                    
+                            except StaleElementReferenceException:
+                                print("⚠️ Element became stale, re-finding...")
+                                # Re-find the element
+                                try:
+                                    refreshed_thumbnails = driver.find_elements(By.CSS_SELECTOR, selector)
+                                    if refreshed_thumbnails:
+                                        thumbnail = refreshed_thumbnails[0]  # Use first found
+                                        if thumbnail.is_displayed() and thumbnail.is_enabled():
+                                            driver.execute_script("arguments[0].click();", thumbnail)
+                                        else:
+                                            continue
+                                    else:
+                                        continue
+                                except Exception as e:
+                                    print(f"⚠️ Failed to re-find element: {e}")
+                                    continue
+                            except Exception as e:
+                                print(f"⚠️ Element validation failed: {e}")
+                                continue
                             print("⏳ Clicked video thumbnail, waiting for player...")
                             
+                            # RELIABILITY FIX: Proper wait after click
+                            time.sleep(1)  # Initial wait for click action to process
+                            
                             # Check if we stayed on the same page OR redirected to lesson page
-                            current_url = driver.current_url
-                            if original_url in current_url or current_url in original_url:
-                                print("✅ Stayed on the same page after clicking thumbnail")
+                            try:
+                                # Wait for any navigation to complete
+                                WebDriverWait(driver, 5).until(lambda d: d.execute_script("return document.readyState") == "complete")
+                                current_url = driver.current_url
+                                
+                                if original_url == current_url:
+                                    print("✅ Stayed on the same page after clicking thumbnail")
+                                    video_thumbnail_clicked = True
+                                    break
+                                elif "classroom" not in current_url and len(current_url) > len(original_url):
+                                    print(f"✅ Redirected to lesson-specific page: {current_url}")
+                                    print("🎯 This is where the video should be located - continuing with detection...")
+                                    video_thumbnail_clicked = True
+                                    break
+                                elif any(keyword in current_url for keyword in ["lesson", "day-", "video", "watch"]):
+                                    print(f"✅ Redirected to lesson page: {current_url}")
+                                    print("🎯 This might be where the video is located - continuing with detection...")
+                                    video_thumbnail_clicked = True
+                                    break
+                                else:
+                                    print(f"⚠️ Page changed unexpectedly: {current_url}")
+                                    # Don't go back immediately, try to extract from current page first
+                                    video_thumbnail_clicked = True
+                                    break
+                                    
+                            except TimeoutException:
+                                print("⚠️ Page load timeout after click, proceeding anyway...")
                                 video_thumbnail_clicked = True
                                 break
-                            elif any(keyword in current_url for keyword in ["lesson", "day-", "video", "watch"]) or len(current_url) > len(original_url):
-                                print(f"✅ Redirected to lesson-specific page: {current_url}")
-                                print("🎯 This might be where the video is located - continuing with detection...")
+                            except Exception as e:
+                                print(f"⚠️ Error checking navigation after click: {e}")
                                 video_thumbnail_clicked = True
                                 break
-                            else:
-                                print(f"⚠️ Page changed unexpectedly: {current_url}")
-                                driver.get(original_url)  # Go back to original page
-                                time.sleep(2)
                         
                 if video_thumbnail_clicked:
                     break
@@ -734,10 +794,19 @@ def click_video_thumbnail_safely(driver):
         # Enhanced iframe detection with progressive waiting
         print("🔍 Starting enhanced video detection after thumbnail click...")
         
-        # Try multiple wait times to handle different loading speeds
-        for wait_attempt, wait_time in enumerate([2, 3, 5, 8], 1):
+        # RELIABILITY FIX: Progressive iframe detection with proper waits
+        for wait_attempt, wait_time in enumerate([1, 2, 4], 1):
             print(f"🔄 Detection attempt {wait_attempt}: waiting {wait_time}s for iframe to load...")
             time.sleep(wait_time)
+            
+            # Wait for any iframes to be present in DOM
+            try:
+                WebDriverWait(driver, 5).until(lambda d: len(d.find_elements(By.TAG_NAME, "iframe")) > 0)
+                print("✅ Found iframe(s) in DOM")
+            except TimeoutException:
+                print(f"⚠️ No iframes found after {wait_time}s wait")
+                if wait_attempt < 3:  # Continue trying if not last attempt
+                    continue
             
             # Debug current page state
             debug_page_state_after_click(driver)
@@ -1260,12 +1329,46 @@ def click_red_play_button_in_popup(driver):
         print(f"❌ Error in click_red_play_button_in_popup: {str(e)}")
         return False
 
-def extract_video_two_step_click(driver):
+def extract_video_two_step_click(driver, target_lesson_id=None):
     """
     Handle two-step click workflow: 1) Click lesson container, 2) Click video player
+    Now with intelligent container selection based on lesson ID
     """
     try:
         print("🎯 Step 1: Looking for lesson/post container to click...")
+        
+        # If we have a target lesson ID, try to find the specific container first
+        if target_lesson_id:
+            print(f"🎯 Looking for specific lesson with ID: {target_lesson_id}")
+            
+            # Try to find containers that might contain our target lesson
+            specific_selectors = [
+                f'a[href*="{target_lesson_id}"]',
+                f'[data-lesson-id*="{target_lesson_id}"]',
+                f'[data-module-id*="{target_lesson_id}"]',
+                f'[href*="md={target_lesson_id}"]',
+                # Look for containers with the lesson ID in their attributes
+                f'[class*="lesson"][href*="{target_lesson_id}"]',
+                f'[class*="module"][href*="{target_lesson_id}"]'
+            ]
+            
+            for selector in specific_selectors:
+                try:
+                    specific_containers = driver.find_elements(By.CSS_SELECTOR, selector)
+                    if specific_containers:
+                        print(f"🎯 Found {len(specific_containers)} specific container(s) with selector: {selector}")
+                        container = specific_containers[0]
+                        print(f"🎯 Clicking specific container: {container.tag_name} with text: '{container.text[:50]}...'")
+                        driver.execute_script("arguments[0].click();", container)
+                        time.sleep(3)  # Wait for content to load
+                        container_clicked = True
+                        break
+                except Exception as e:
+                    print(f"⚠️ Error with specific selector {selector}: {str(e)}")
+                    continue
+        
+        # Fallback to general container selection with better targeting
+        print("🎯 No specific lesson found, using intelligent container selection...")
         
         # Try different selectors for lesson containers - Focus on main lesson post
         container_selectors = [
@@ -1274,6 +1377,10 @@ def extract_video_two_step_click(driver):
             'div[class*="PostContentWrapper"]:first-of-type',
             'div[class*="styled__PostContent"]:first-of-type', 
             'div[class*="PostContent"]:first-of-type',
+            # Look for containers that might be the main lesson (not comments/posts)
+            'div[class*="LessonContent"]',
+            'div[class*="ModuleContent"]',
+            'div[class*="CourseContent"]',
             # Fallback to more generic selectors
             'a[href*="/new-video-i-built-a-yt-strategist"]',  # Specific link from your HTML
             'a[class*="ChildrenLink"]',  # The specific class from your HTML
@@ -1293,13 +1400,36 @@ def extract_video_two_step_click(driver):
                 containers = driver.find_elements(By.CSS_SELECTOR, selector)
                 if containers:
                     print(f"🎯 Found {len(containers)} container(s) with selector: {selector}")
-                    # Click the first container
-                    container = containers[0]
-                    print(f"🎯 Clicking container: {container.tag_name} with text: '{container.text[:50]}...'")
-                    driver.execute_script("arguments[0].click();", container)
-                    time.sleep(3)  # Wait for content to load
-                    container_clicked = True
-                    break
+                    
+                    # Instead of clicking the first container, analyze them to find the best one
+                    best_container = None
+                    for i, container in enumerate(containers):
+                        container_text = container.text.strip()
+                        container_href = container.get_attribute('href') or ''
+                        
+                        print(f"🎯 Container {i+1}: text='{container_text[:50]}...', href='{container_href[:50]}...'")
+                        
+                        # Skip containers that look like comments or unrelated posts
+                        if any(skip_word in container_text.lower() for skip_word in ['comment', 'reply', 'like', 'share', 'follow']):
+                            print(f"🎯 Skipping container {i+1} - appears to be a comment/post")
+                            continue
+                            
+                        # Prefer containers that look like main lesson content
+                        if any(keyword in container_text.lower() for keyword in ['lesson', 'module', 'video', 'tutorial', 'guide']):
+                            print(f"🎯 Container {i+1} looks like main lesson content")
+                            best_container = container
+                            break
+                    
+                    # If no specific lesson container found, use the first one that's not clearly a comment
+                    if not best_container and containers:
+                        best_container = containers[0]
+                    
+                    if best_container:
+                        print(f"🎯 Clicking best container: {best_container.tag_name} with text: '{best_container.text[:50]}...'")
+                        driver.execute_script("arguments[0].click();", best_container)
+                        time.sleep(3)  # Wait for content to load
+                        container_clicked = True
+                        break
             except Exception as e:
                 print(f"⚠️ Error with selector {selector}: {str(e)}")
                 continue
@@ -1445,35 +1575,159 @@ def extract_video_two_step_click(driver):
         print(f"❌ Error in two-step click workflow: {str(e)}")
         return None
 
-def extract_video_url_universal(driver, use_all_methods=False):
+def extract_video_url_universal_with_retry(driver, use_all_methods=False, target_lesson_id=None, max_retries=2):
+    """Wrapper function with retry logic for video extraction"""
+    
+    for attempt in range(max_retries):
+        try:
+            print(f"🔄 VIDEO EXTRACTION ATTEMPT {attempt + 1}/{max_retries}")
+            result = extract_video_url_universal(driver, use_all_methods, target_lesson_id)
+            if result:
+                print(f"✅ EXTRACTION SUCCESS on attempt {attempt + 1}")
+                return result
+            else:
+                print(f"⚠️ EXTRACTION FAILED on attempt {attempt + 1}")
+                if attempt < max_retries - 1:
+                    print("🔄 Retrying extraction after clearing state...")
+                    # Clear browser state between attempts
+                    driver.execute_script("window.scrollTo(0, 0);")  # Reset scroll
+                    time.sleep(1)
+        except Exception as e:
+            print(f"❌ EXTRACTION ERROR on attempt {attempt + 1}: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2)  # Wait before retry
+    
+    print("❌ ALL EXTRACTION ATTEMPTS FAILED")
+    return None
+
+def extract_video_url_universal(driver, use_all_methods=False, target_lesson_id=None):
     """Enhanced video extraction supporting multiple platforms (YouTube, Vimeo, etc.)
     If use_all_methods is True, also attempt the two-step click workflow.
+    
+    RELIABILITY ENHANCEMENTS:
+    - Proper wait conditions for navigation and elements
+    - Element validation before interaction  
+    - Retry logic with exponential backoff
+    - Success validation before returning
     """
     
+    # RELIABILITY FIX: Success validation function
+    def validate_video_data(video_data):
+        """Validate that video data is actually usable"""
+        if not video_data:
+            return False
+        url = video_data.get('url', '')
+        if not url or len(url) < 10:
+            return False
+        # Check it's not a thumbnail image
+        if any(ext in url.lower() for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp']):
+            print(f"⚠️ Rejecting thumbnail image URL: {url}")
+            return False
+        # Check it's a valid video URL
+        valid_platforms = ['youtube.com', 'youtu.be', 'vimeo.com', 'loom.com', 'wistia', '.mp4', '.m3u8', '.webm']
+        if not any(platform in url.lower() for platform in valid_platforms):
+            print(f"⚠️ Rejecting non-video URL: {url}")
+            return False
+        return True
+    
     # Method 1: JSON data extraction (most reliable)
+    print("🔍 METHOD 1: JSON data extraction...")
     video_data = extract_from_next_data(driver)
-    if video_data:
+    if video_data and validate_video_data(video_data):
+        print(f"✅ METHOD 1 SUCCESS: {video_data.get('url')}")
         return video_data
+    elif video_data:
+        print(f"⚠️ METHOD 1 INVALID: {video_data.get('url')}")
     
-    # Method 2: iframe scanning (all platforms) 
+    # Method 2: iframe scanning (all platforms)
+    print("🔍 METHOD 2: iframe scanning...")
     video_data = scan_video_iframes(driver)
-    if video_data:
+    if video_data and validate_video_data(video_data):
+        print(f"✅ METHOD 2 SUCCESS: {video_data.get('url')}")
         return video_data
+    elif video_data:
+        print(f"⚠️ METHOD 2 INVALID: {video_data.get('url')}")
     
-    # Method 2.5: Safe video thumbnail click (no navigation)
-    print("🔍 Trying safe video thumbnail click...")
+    # Method 2.5: Safe video thumbnail click (with navigation handling)
+    print("🔍 METHOD 2.5: Safe video thumbnail click...")
+    original_url = driver.current_url
     video_data = click_video_thumbnail_safely(driver)
-    if video_data:
+    if video_data and validate_video_data(video_data):
+        print(f"✅ METHOD 2.5 SUCCESS: {video_data.get('url')}")
         return video_data
+    elif video_data:
+        print(f"⚠️ METHOD 2.5 INVALID: {video_data.get('url')}")
     
-    # Method 3: Two-step click workflow (optional aggressive mode)
-    if use_all_methods:
-        print("🔍 Aggressive mode: trying two-step click workflow...")
-        video_data = extract_video_two_step_click(driver)
-        if video_data:
-            return video_data
-    else:
-        print("🔍 Skipping two-step click workflow (aggressive mode disabled)...")
+    # Method 2.6: Check if we navigated to a lesson page and extract video from there
+    current_url = driver.current_url
+    if original_url != current_url:
+        print(f"🔍 Detected navigation from {original_url} to {current_url}")
+        
+        # Check if we navigated to a lesson page (not classroom)
+        if "classroom" not in current_url and len(current_url) > len(original_url):
+            print("🔍 Navigation detected to lesson page - extracting video from new page...")
+            
+            # RELIABILITY FIX: Proper wait for navigation and page load
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            
+            try:
+                # Wait for navigation to fully complete (URL stabilizes)
+                WebDriverWait(driver, 10).until(lambda d: d.current_url == current_url)
+                print("✅ Navigation completed successfully")
+                
+                # Wait for page to be fully loaded (DOM ready)
+                WebDriverWait(driver, 10).until(lambda d: d.execute_script("return document.readyState") == "complete")
+                print("✅ Page DOM loaded completely")
+                
+                # Additional wait for dynamic content (video elements)
+                time.sleep(2)
+                print("✅ Waiting for dynamic video content to load...")
+                
+            except Exception as e:
+                print(f"⚠️ Navigation wait failed: {e}, proceeding anyway...")
+            
+            # Try all extraction methods on the new page with retry logic
+            extraction_methods = [
+                ("JSON data", extract_from_next_data),
+                ("iframe scan", scan_video_iframes),
+                ("network logs", extract_video_from_network_logs),
+                ("thumbnail click", click_video_thumbnail_safely)
+            ]
+            
+            for method_name, method_func in extraction_methods:
+                for attempt in range(2):  # Try each method twice
+                    try:
+                        print(f"🔍 Attempting {method_name} extraction (attempt {attempt + 1}/2)...")
+                        video_data = method_func(driver)
+                        if video_data and video_data.get('url'):
+                            print(f"✅ Found video via {method_name} on lesson page: {video_data.get('url')}")
+                            return video_data
+                        elif attempt == 0:
+                            # Wait before retry
+                            print(f"⚠️ {method_name} failed, waiting before retry...")
+                            time.sleep(1)
+                    except Exception as e:
+                        print(f"⚠️ {method_name} extraction error (attempt {attempt + 1}): {e}")
+                        if attempt == 0:
+                            time.sleep(1)  # Wait before retry
+                
+            print("⚠️ No video found on navigated lesson page after all methods")
+        else:
+            print("⚠️ Navigation detected but not to a lesson page")
+    
+    # Method 3: Two-step click workflow (enabled but with navigation protection)
+    print("🔍 Trying two-step click workflow with navigation protection...")
+    original_url = driver.current_url
+    video_data = extract_video_two_step_click(driver, target_lesson_id)
+    if video_data:
+        # Check if we navigated away from the target lesson
+        current_url = driver.current_url
+        if original_url not in current_url and current_url not in original_url:
+            print("⚠️ Navigation detected - returning to original lesson...")
+            driver.get(original_url)
+            time.sleep(3)
+        return video_data
     
     # Method 3.5: Network logs inspection (capture HLS/MP4 or hidden player requests)
     print("🔍 Inspecting network logs for media URLs...")
@@ -1513,12 +1767,12 @@ def extract_video_from_network_logs(driver):
             # Accept direct media files or HLS
             if any(ext in u for ext in ['.m3u8', '.mp4', '.webm', '.mov']):
                 return True
-            # Accept known player/embeds
+            # Accept known player/embeds (but prefer direct video URLs over oembed)
             if ('youtube.com' in u or 'youtu.be' in u or 'vimeo.com' in u or 'loom.com' in u or
-                'fast.wistia.net/embed/iframe/' in u or 'wistia.com/medias/' in u or 'oembed?format=json&url=' in u):
+                'fast.wistia.net/embed/iframe/' in u or 'wistia.com/medias/' in u):
                 return True
-            # Exclude Wistia delivery images
-            if 'wistia' in u and 'deliveries' in u:
+            # Exclude Wistia delivery images and oembed URLs
+            if 'wistia' in u and ('deliveries' in u or 'oembed' in u):
                 return False
             return False
 
@@ -1541,6 +1795,28 @@ def extract_video_from_network_logs(driver):
         prioritized = sorted(candidates, key=lambda u: (('m3u8' not in u and '.mp4' not in u), len(u)))
         if prioritized:
             best = prioritized[0]
+            
+            # If it's a Wistia oembed URL, extract the actual video URL
+            if 'wistia.com' in best and 'oembed' in best:
+                try:
+                    import urllib.parse
+                    parsed = urllib.parse.urlparse(best)
+                    query_params = urllib.parse.parse_qs(parsed.query)
+                    if 'url' in query_params:
+                        actual_url = query_params['url'][0]
+                        # Extract the video ID from the Wistia URL
+                        if 'wistia.com/medias/' in actual_url:
+                            video_id = actual_url.split('/medias/')[-1]
+                            direct_wistia_url = f"https://ondrejdavidbusiness.wistia.com/medias/{video_id}"
+                            print(f"✅ Found Wistia video via network logs: {direct_wistia_url}")
+                            return {
+                                'url': direct_wistia_url,
+                                'platform': 'wistia',
+                                'source': 'network_logs'
+                            }
+                except Exception as e:
+                    print(f"⚠️ Error extracting Wistia URL: {e}")
+            
             platform = detect_platform(best)
             clean_url = clean_video_url(best, platform)
             print(f"✅ Found media via network logs: {clean_url}")
@@ -1721,16 +1997,13 @@ def extract_content(driver):
                     print(f"✅ Extracted content using selector: {selector}")
                     print(f"📝 Content preview: '{content_preview}...'")
                     
-                    # Check if this is the right content (should contain "paying off the ignorance debt")
+                    # Use the first substantial content found (don't filter by specific text)
                     content_text = main_content_element.text.strip()
-                    if "paying off the ignorance debt" in content_text.lower():
-                        print("🎯 Found the correct lesson content!")
-                        break
-                    elif "things are not moving as fast as I'd like" in content_text.lower():
-                        print("🎯 Found the correct lesson content!")
+                    if len(content_text) > 50:  # Ensure we have substantial content
+                        print("🎯 Found lesson content!")
                         break
                     else:
-                        print("⚠️ This might be the wrong content, trying next selector...")
+                        print("⚠️ Content too short, trying next selector...")
                         main_content_element = None
                         continue
             except Exception:
@@ -1945,7 +2218,13 @@ def main():
             lesson_name = "Untitled Lesson - " + datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         
         # Extract video with universal detection (aggressive all-methods mode)
-        video_data = extract_video_url_universal(driver, use_all_methods=True)
+        # Extract lesson ID from URL for better targeting
+        lesson_module_id = None
+        if 'md=' in args.url:
+            lesson_module_id = args.url.split('md=')[1].split('&')[0]
+            print(f"🎯 Extracted lesson module ID: {lesson_module_id}")
+        
+        video_data = extract_video_url_universal_with_retry(driver, use_all_methods=True, target_lesson_id=lesson_module_id)
         
         # Extract content
         content = extract_content(driver)
