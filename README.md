@@ -1,18 +1,18 @@
-# 🚀 Ultimate Skool Scraper V5.1 - Production Ready
+# 🚀 Ultimate Skool Scraper V5.2 - Perfect Video Extraction ✅
 
-A powerful, feature-rich content extraction tool for Skool.com communities. **Now with advanced video detection, hierarchical organization, and comprehensive cleanup system.**
+A powerful, feature-rich content extraction tool for Skool.com communities. **Now with PERFECT video extraction that gets actual video URLs, not thumbnail images!**
 
-## ✨ Latest Breakthroughs (V5.1)
+## ✨ Latest Breakthroughs (V5.2) - August 2025
 
-### 🎥 **Advanced Video Detection Pipeline**
-- **Enhanced JSON Extraction** - Searches multiple paths in `__NEXT_DATA__`
-- **Universal Iframe Scanning** - Detects React players and traditional iframes
-- **🆕 Safe Video Thumbnail Clicking** - Clicks video thumbnails safely without page navigation
-- **🆕 Modal/Popup Video Player Detection** - Finds videos in modal overlays
-- **🆕 Custom Video Player Detection** - Handles red play buttons and custom players
-- **🆕 Wistia `wvideo`/Class-based Detection** - Extracts Wistia IDs from URL query params and `wistia_async_*` classes
-- **🆕 Overlay Dismissal** - Automatically dismisses "click for sound" overlays
-- **Legacy YouTube Extraction** - Backward compatibility fallback
+### 🎥 **PERFECT Video Detection Pipeline** ✅
+- **🆕 FIXED: Actual Video URL Extraction** - No more thumbnail images, extracts real video URLs
+- **🆕 Enhanced `videoLinksData` Parsing** - Extracts from actual video data fields in JSON
+- **🆕 Automatic Image URL Filtering** - Prevents extraction of `.jpg`, `.png` thumbnail images  
+- **🆕 Zero Manual Intervention** - Fully automatic video detection and extraction
+- **🆕 Verified Multi-Platform Support** - YouTube, Vimeo, Loom, Wistia with real-world testing
+- **🆕 Custom Player Enhancement** - Advanced detection of Skool's video components
+- **🆕 Robust Error Handling** - Multiple fallback methods ensure reliability
+- **Legacy Support Maintained** - Backward compatibility with all previous methods
 
 ### 🗂️ **Hierarchical Folder Structure**
 Organizes content exactly like Skool's structure:
@@ -206,4 +206,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ Star this repository if you find it helpful!**
 
-*Last updated: January 2025 - V5.1 Production Release*
+*Last updated: August 2025 - V5.2 Perfect Video Extraction Release*

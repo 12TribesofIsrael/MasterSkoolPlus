@@ -35,8 +35,769 @@ except Exception:
 SKOOL_EMAIL = os.getenv("SKOOL_EMAIL", "")  # Skool email from environment
 SKOOL_PASSWORD = os.getenv("SKOOL_PASSWORD", "")  # Skool password from environment
 
-# Session-level tracking to prevent duplicate video URLs across lessons in a single run
+# Enhanced session-level tracking to prevent duplicate video URLs across lessons in a single run
 SEEN_VIDEO_IDS_SESSION = set()
+
+# Enhanced session tracking with detailed metadata
+SESSION_VIDEO_TRACKING = {}
+
+# Session statistics for reporting
+SESSION_STATS = {
+    'videos_processed': 0,
+    'duplicates_blocked': 0,
+    'unique_videos_found': 0,
+    'lessons_processed': 0,
+    'extraction_methods_used': set(),
+    'platforms_detected': set()
+}
+
+# Lesson-specific validation tracking
+LESSON_CONTEXT = {
+    'current_lesson_title': None,
+    'current_lesson_url': None,
+    'current_lesson_id': None,
+    'lesson_video_signatures': {},  # Store video signatures per lesson
+    'lesson_content_hashes': {},    # Store content hashes per lesson
+    'lesson_validation_cache': {}   # Cache validation results per lesson
+}
+
+# Browser isolation tracking
+BROWSER_ISOLATION = {
+    'current_browser_instance': None,
+    'browser_instances_created': 0,
+    'browser_instances_destroyed': 0,
+    'isolation_mode': 'shared',  # 'shared' or 'isolated'
+    'isolation_stats': {
+        'lessons_with_isolated_browsers': 0,
+        'lessons_with_shared_browser': 0,
+        'browser_creation_time': 0,
+        'browser_destruction_time': 0
+    }
+}
+
+# Enhanced debugging - track video extraction attempts across all methods
+VIDEO_EXTRACTION_DEBUG_LOG = []
+
+def reset_session_tracking():
+    """Reset all session-level tracking for a new scraping session"""
+    global SEEN_VIDEO_IDS_SESSION, SESSION_VIDEO_TRACKING, SESSION_STATS, VIDEO_EXTRACTION_DEBUG_LOG, LESSON_CONTEXT, BROWSER_ISOLATION
+    
+    SEEN_VIDEO_IDS_SESSION.clear()
+    SESSION_VIDEO_TRACKING.clear()
+    VIDEO_EXTRACTION_DEBUG_LOG.clear()
+    
+    SESSION_STATS.update({
+        'videos_processed': 0,
+        'duplicates_blocked': 0,
+        'unique_videos_found': 0,
+        'lessons_processed': 0,
+        'extraction_methods_used': set(),
+        'platforms_detected': set()
+    })
+    
+    # Reset lesson context
+    LESSON_CONTEXT.update({
+        'current_lesson_title': None,
+        'current_lesson_url': None,
+        'current_lesson_id': None,
+        'lesson_video_signatures': {},
+        'lesson_content_hashes': {},
+        'lesson_validation_cache': {}
+    })
+    
+    # Reset browser isolation tracking
+    BROWSER_ISOLATION.update({
+        'current_browser_instance': None,
+        'browser_instances_created': 0,
+        'browser_instances_destroyed': 0,
+        'isolation_mode': 'shared',
+        'isolation_stats': {
+            'lessons_with_isolated_browsers': 0,
+            'lessons_with_shared_browser': 0,
+            'browser_creation_time': 0,
+            'browser_destruction_time': 0
+        }
+    })
+    
+    print("🔄 Session tracking reset for new scraping session")
+
+def register_video_in_session(video_url, lesson_title, extraction_method, platform=None):
+    """Register a video in the session tracking system with comprehensive metadata"""
+    import datetime
+    
+    if not video_url:
+        return False
+    
+    # Extract standardized video ID
+    video_id = _extract_video_id_generic(video_url)
+    if not video_id:
+        print(f"⚠️ Could not extract video ID from URL: {video_url}")
+        return True  # Allow video but without session tracking
+    
+    SESSION_STATS['videos_processed'] += 1
+    SESSION_STATS['extraction_methods_used'].add(extraction_method)
+    if platform:
+        SESSION_STATS['platforms_detected'].add(platform)
+    
+    # Check if this video ID has been seen before in this session
+    if video_id in SEEN_VIDEO_IDS_SESSION:
+        SESSION_STATS['duplicates_blocked'] += 1
+        
+        # Get previous usage info
+        previous_info = SESSION_VIDEO_TRACKING.get(video_id, {})
+        previous_lesson = previous_info.get('lesson_title', 'Unknown')
+        previous_method = previous_info.get('extraction_method', 'Unknown')
+        previous_timestamp = previous_info.get('timestamp', 'Unknown')
+        
+        print(f"🚫 SESSION DUPLICATE DETECTED:")
+        print(f"   📹 Video ID: {video_id}")
+        print(f"   🔗 URL: {video_url}")
+        print(f"   📚 Current Lesson: {lesson_title}")
+        print(f"   🔧 Current Method: {extraction_method}")
+        print(f"   📋 Previous Usage:")
+        print(f"      └─ Lesson: {previous_lesson}")
+        print(f"      └─ Method: {previous_method}")
+        print(f"      └─ Time: {previous_timestamp}")
+        
+        log_video_extraction_attempt(
+            f"{extraction_method}_SESSION_DUPLICATE", 
+            lesson_title, 
+            video_url, 
+            'blocked',
+            {
+                'reason': 'session_duplicate',
+                'video_id': video_id,
+                'previous_lesson': previous_lesson,
+                'previous_method': previous_method,
+                'duplicate_count': SESSION_STATS['duplicates_blocked']
+            }
+        )
+        
+        return False  # Block this duplicate
+    
+    # Register new video in session tracking
+    SEEN_VIDEO_IDS_SESSION.add(video_id)
+    SESSION_VIDEO_TRACKING[video_id] = {
+        'video_url': video_url,
+        'lesson_title': lesson_title,
+        'extraction_method': extraction_method,
+        'platform': platform,
+        'timestamp': datetime.datetime.now().isoformat(),
+        'order': len(SESSION_VIDEO_TRACKING) + 1
+    }
+    
+    SESSION_STATS['unique_videos_found'] += 1
+    
+    print(f"✅ SESSION TRACKING: Registered new video")
+    print(f"   📹 Video ID: {video_id}")
+    print(f"   📚 Lesson: {lesson_title}")
+    print(f"   🔧 Method: {extraction_method}")
+    print(f"   🏷️ Platform: {platform or 'Unknown'}")
+    print(f"   📊 Unique videos this session: {SESSION_STATS['unique_videos_found']}")
+    
+    log_video_extraction_attempt(
+        f"{extraction_method}_SESSION_REGISTERED", 
+        lesson_title, 
+        video_url, 
+        'found',
+        {
+            'video_id': video_id,
+            'platform': platform,
+            'session_order': SESSION_VIDEO_TRACKING[video_id]['order'],
+            'unique_count': SESSION_STATS['unique_videos_found']
+        }
+    )
+    
+    return True  # Allow this video
+
+def check_session_duplicate_early(video_url, lesson_title, extraction_method):
+    """Early duplicate detection before full validation - more efficient"""
+    if not video_url:
+        return False
+    
+    video_id = _extract_video_id_generic(video_url)
+    if not video_id:
+        return False  # Can't determine, let full validation handle it
+    
+    if video_id in SEEN_VIDEO_IDS_SESSION:
+        previous_info = SESSION_VIDEO_TRACKING.get(video_id, {})
+        print(f"🚫 EARLY SESSION DUPLICATE DETECTED in {extraction_method}")
+        print(f"   📹 Video ID: {video_id} from lesson '{previous_info.get('lesson_title', 'Unknown')}'")
+        return True  # This is a duplicate
+    
+    return False  # Not a duplicate
+
+def print_session_statistics():
+    """Print comprehensive session statistics"""
+    print("\n📊 === SESSION STATISTICS ===")
+    print(f"📚 Lessons Processed: {SESSION_STATS['lessons_processed']}")
+    print(f"🎥 Videos Processed: {SESSION_STATS['videos_processed']}")
+    print(f"✅ Unique Videos Found: {SESSION_STATS['unique_videos_found']}")
+    print(f"🚫 Duplicates Blocked: {SESSION_STATS['duplicates_blocked']}")
+    
+    if SESSION_STATS['extraction_methods_used']:
+        print(f"🔧 Extraction Methods Used: {', '.join(SESSION_STATS['extraction_methods_used'])}")
+    
+    if SESSION_STATS['platforms_detected']:
+        print(f"🏷️ Platforms Detected: {', '.join(SESSION_STATS['platforms_detected'])}")
+    
+    if SESSION_VIDEO_TRACKING:
+        print(f"\n📋 Video Usage Summary:")
+        for i, (video_id, info) in enumerate(SESSION_VIDEO_TRACKING.items(), 1):
+            platform = info.get('platform', 'Unknown')
+            lesson = info.get('lesson_title', 'Unknown')
+            method = info.get('extraction_method', 'Unknown')
+            print(f"   {i:2d}. [{platform:7s}] {lesson} (via {method})")
+    
+    # Calculate efficiency metrics
+    if SESSION_STATS['videos_processed'] > 0:
+        efficiency = (SESSION_STATS['unique_videos_found'] / SESSION_STATS['videos_processed']) * 100
+        print(f"\n📈 Session Efficiency: {efficiency:.1f}% unique videos")
+    
+    print("=" * 40)
+
+def save_session_tracking_report():
+    """Save detailed session tracking report to file"""
+    try:
+        import json
+        import datetime
+        
+        # Convert sets to lists for JSON serialization
+        session_stats_copy = dict(SESSION_STATS)
+        session_stats_copy['extraction_methods_used'] = list(SESSION_STATS['extraction_methods_used'])
+        session_stats_copy['platforms_detected'] = list(SESSION_STATS['platforms_detected'])
+        
+        report = {
+            'session_stats': session_stats_copy,
+            'video_tracking': SESSION_VIDEO_TRACKING,
+            'seen_video_ids': list(SEEN_VIDEO_IDS_SESSION),
+            'lesson_context': LESSON_CONTEXT,
+            'browser_isolation': BROWSER_ISOLATION,
+            'report_generated': datetime.datetime.now().isoformat()
+        }
+        
+        with open('debug_session_tracking_report.json', 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+        
+        print(f"📄 Session tracking report saved: debug_session_tracking_report.json")
+        
+    except Exception as e:
+        print(f"⚠️ Failed to save session tracking report: {e}")
+
+def create_isolated_browser_instance():
+    """Create a completely isolated browser instance for lesson processing"""
+    import time
+    
+    print("🔄 Creating isolated browser instance...")
+    start_time = time.time()
+    
+    try:
+        # Create new driver with enhanced isolation options
+        driver = setup_driver()
+        
+        # Additional isolation measures
+        driver.execute_script("window.localStorage.clear();")
+        driver.execute_script("window.sessionStorage.clear();")
+        driver.delete_all_cookies()
+        
+        # Clear any cached data
+        driver.execute_script("""
+            if ('caches' in window) {
+                caches.keys().then(function(names) {
+                    for (let name of names) caches.delete(name);
+                });
+            }
+        """)
+        
+        BROWSER_ISOLATION['browser_instances_created'] += 1
+        BROWSER_ISOLATION['current_browser_instance'] = driver
+        BROWSER_ISOLATION['isolation_mode'] = 'isolated'
+        BROWSER_ISOLATION['isolation_stats']['browser_creation_time'] += (time.time() - start_time)
+        
+        print(f"✅ Isolated browser instance created (total: {BROWSER_ISOLATION['browser_instances_created']})")
+        return driver
+        
+    except Exception as e:
+        print(f"❌ Failed to create isolated browser: {e}")
+        return None
+
+def destroy_browser_instance(driver, reason="normal_cleanup"):
+    """Safely destroy a browser instance with cleanup"""
+    import time
+    
+    if not driver:
+        return
+    
+    print(f"🗑️ Destroying browser instance ({reason})...")
+    start_time = time.time()
+    
+    try:
+        # Clear all data before closing
+        try:
+            driver.execute_script("window.localStorage.clear();")
+            driver.execute_script("window.sessionStorage.clear();")
+            driver.delete_all_cookies()
+        except:
+            pass  # Ignore cleanup errors
+        
+        # Close browser
+        driver.quit()
+        
+        BROWSER_ISOLATION['browser_instances_destroyed'] += 1
+        BROWSER_ISOLATION['current_browser_instance'] = None
+        BROWSER_ISOLATION['isolation_stats']['browser_destruction_time'] += (time.time() - start_time)
+        
+        print(f"✅ Browser instance destroyed (total: {BROWSER_ISOLATION['browser_instances_destroyed']})")
+        
+    except Exception as e:
+        print(f"⚠️ Error destroying browser: {e}")
+
+def process_lesson_with_isolated_browser(lesson_title, lesson_url, lesson_id, email, password, download_videos=False, output_dirs=None, community_display_name=None, community_slug=None):
+    """Process a single lesson with complete browser isolation"""
+    
+    print(f"🔒 PROCESSING LESSON WITH ISOLATED BROWSER: {lesson_title}")
+    
+    # Create isolated browser instance
+    driver = create_isolated_browser_instance()
+    if not driver:
+        print(f"❌ Failed to create isolated browser for: {lesson_title}")
+        return False
+    
+    try:
+        # Login to Skool in isolated browser
+        print(f"🔐 Logging in to Skool (isolated browser)...")
+        if not login_to_skool(driver, email, password):
+            print("❌ Login failed in isolated browser")
+            return False
+        
+        print(f"✅ Login successful in isolated browser!")
+        
+        # Navigate to lesson
+        print(f"🌐 Navigating to lesson (isolated browser)...")
+        driver.get(lesson_url)
+        time.sleep(3)  # Wait for page to load
+        
+        # Set lesson context for validation
+        set_lesson_context(lesson_title, lesson_url, lesson_id)
+        
+        # Generate lesson content signature for validation
+        generate_lesson_content_signature(driver, lesson_title)
+        
+        # Extract video with complete isolation
+        print(f"🎥 Extracting video (isolated browser)...")
+        video_data = extract_video_url(driver, lesson_title)
+        
+        # Extract content
+        print(f"📝 Extracting content (isolated browser)...")
+        content = extract_lesson_content(driver)
+        
+        # Download images
+        images_downloaded = download_images_from_lesson(driver, lesson_title, output_dirs['images']) if output_dirs else []
+        
+        # Download video if requested
+        video_downloaded = False
+        if video_data and download_videos and output_dirs:
+            video_output_dir = os.path.join(output_dirs['lessons'], sanitize_filename(lesson_title), "videos")
+            video_downloaded = download_video_universal(video_data, lesson_title, video_output_dir)
+        
+        # Save lesson content
+        if output_dirs:
+            success = save_lesson_content(
+                lesson_title, 
+                video_data, 
+                content, 
+                images_downloaded,
+                output_dirs,
+                video_downloaded,
+                community_display_name,
+                community_slug
+            )
+            
+            if success:
+                SESSION_STATS['lessons_processed'] += 1
+                BROWSER_ISOLATION['isolation_stats']['lessons_with_isolated_browsers'] += 1
+                print(f"✅ Successfully processed lesson with isolated browser: {lesson_title}")
+                return True
+            else:
+                print(f"❌ Failed to save lesson: {lesson_title}")
+                return False
+        else:
+            # Just return the extracted data
+            BROWSER_ISOLATION['isolation_stats']['lessons_with_isolated_browsers'] += 1
+            print(f"✅ Successfully extracted lesson data with isolated browser: {lesson_title}")
+            return {
+                'video_data': video_data,
+                'content': content,
+                'images_downloaded': images_downloaded
+            }
+            
+    except Exception as e:
+        print(f"❌ Error processing lesson with isolated browser: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return False
+        
+    finally:
+        # Always destroy the isolated browser instance
+        destroy_browser_instance(driver, "lesson_complete")
+
+def should_use_browser_isolation(lesson_title, lesson_index, total_lessons):
+    """Determine if browser isolation should be used for this lesson"""
+    
+    # Use isolation for first few lessons (most likely to have cached state)
+    if lesson_index <= 3:
+        print(f"🔒 Using isolation for early lesson ({lesson_index}/{total_lessons}): {lesson_title}")
+        return True
+    
+    # Use isolation for every 5th lesson to prevent state buildup
+    if lesson_index % 5 == 0:
+        print(f"🔒 Using isolation for periodic cleanup lesson ({lesson_index}/{total_lessons}): {lesson_title}")
+        return True
+    
+    # Always use isolation for lessons that previously had duplicate issues
+    problematic_lessons = [
+        'introduction', 'welcome', 'overview', 'getting started',
+        'basics', 'fundamentals'
+    ]
+    
+    lesson_lower = lesson_title.lower()
+    for problematic in problematic_lessons:
+        # Use word boundary matching to avoid false positives
+        if problematic in lesson_lower:
+            # Check if it's a standalone word or at the beginning/end
+            if (problematic == lesson_lower or 
+                lesson_lower.startswith(problematic + ' ') or 
+                lesson_lower.endswith(' ' + problematic) or
+                ' ' + problematic + ' ' in lesson_lower):
+                print(f"🔒 Using isolation for potentially problematic lesson: {lesson_title}")
+                return True
+    
+    # Use isolation if we've processed many lessons with shared browser
+    if BROWSER_ISOLATION['isolation_stats']['lessons_with_shared_browser'] >= 10:
+        print(f"🔒 Using isolation after {BROWSER_ISOLATION['isolation_stats']['lessons_with_shared_browser']} shared lessons: {lesson_title}")
+        return True
+    
+    return False
+
+def print_browser_isolation_statistics():
+    """Print comprehensive browser isolation statistics"""
+    print("\n🔒 === BROWSER ISOLATION STATISTICS ===")
+    print(f"🌐 Browser Instances Created: {BROWSER_ISOLATION['browser_instances_created']}")
+    print(f"🗑️ Browser Instances Destroyed: {BROWSER_ISOLATION['browser_instances_destroyed']}")
+    print(f"🔒 Lessons with Isolated Browsers: {BROWSER_ISOLATION['isolation_stats']['lessons_with_isolated_browsers']}")
+    print(f"🔗 Lessons with Shared Browser: {BROWSER_ISOLATION['isolation_stats']['lessons_with_shared_browser']}")
+    
+    total_lessons = (BROWSER_ISOLATION['isolation_stats']['lessons_with_isolated_browsers'] + 
+                    BROWSER_ISOLATION['isolation_stats']['lessons_with_shared_browser'])
+    
+    if total_lessons > 0:
+        isolation_percentage = (BROWSER_ISOLATION['isolation_stats']['lessons_with_isolated_browsers'] / total_lessons) * 100
+        print(f"📊 Isolation Usage: {isolation_percentage:.1f}% of lessons")
+    
+    if BROWSER_ISOLATION['isolation_stats']['browser_creation_time'] > 0:
+        print(f"⏱️ Total Browser Creation Time: {BROWSER_ISOLATION['isolation_stats']['browser_creation_time']:.2f}s")
+    
+    if BROWSER_ISOLATION['isolation_stats']['browser_destruction_time'] > 0:
+        print(f"⏱️ Total Browser Destruction Time: {BROWSER_ISOLATION['isolation_stats']['browser_destruction_time']:.2f}s")
+    
+    print("=" * 40)
+
+def set_lesson_context(lesson_title, lesson_url=None, lesson_id=None):
+    """Set the current lesson context for validation"""
+    global LESSON_CONTEXT
+    
+    LESSON_CONTEXT['current_lesson_title'] = lesson_title
+    LESSON_CONTEXT['current_lesson_url'] = lesson_url
+    LESSON_CONTEXT['current_lesson_id'] = lesson_id
+    
+    print(f"📚 LESSON CONTEXT SET: {lesson_title}")
+    if lesson_url:
+        print(f"   🔗 URL: {lesson_url}")
+    if lesson_id:
+        print(f"   🆔 ID: {lesson_id}")
+
+def generate_lesson_content_signature(driver, lesson_title):
+    """Generate a unique signature for the current lesson's content"""
+    try:
+        import hashlib
+        
+        # Get page content that should be unique to this lesson
+        page_title = driver.title
+        current_url = driver.current_url
+        
+        # Try to get lesson-specific content
+        lesson_content = ""
+        
+        # Look for lesson title in page
+        try:
+            lesson_elements = driver.find_elements(By.CSS_SELECTOR, 
+                'h1, h2, h3, [class*="lesson"], [class*="title"], [class*="heading"]')
+            for element in lesson_elements:
+                text = element.text.strip()
+                if text and len(text) > 5:  # Meaningful text
+                    lesson_content += text + " "
+        except:
+            pass
+        
+        # Get main content area
+        try:
+            main_content = driver.find_elements(By.CSS_SELECTOR, 
+                'main, [class*="content"], [class*="lesson"], article')
+            for element in main_content:
+                text = element.text.strip()
+                if text and len(text) > 20:  # Substantial content
+                    lesson_content += text[:200] + " "  # First 200 chars
+        except:
+            pass
+        
+        # Create signature from lesson title, URL, and content
+        signature_data = f"{lesson_title}|{current_url}|{lesson_content[:500]}"
+        signature = hashlib.md5(signature_data.encode('utf-8')).hexdigest()
+        
+        # Store in lesson context
+        LESSON_CONTEXT['lesson_content_hashes'][lesson_title] = {
+            'signature': signature,
+            'url': current_url,
+            'content_preview': lesson_content[:100] + "..." if len(lesson_content) > 100 else lesson_content,
+            'timestamp': datetime.datetime.now().isoformat()
+        }
+        
+        print(f"🔐 Generated lesson signature: {signature[:8]}... for '{lesson_title}'")
+        return signature
+        
+    except Exception as e:
+        print(f"⚠️ Failed to generate lesson signature: {e}")
+        return None
+
+def validate_video_belongs_to_lesson(video_url, lesson_title, driver=None):
+    """Validate that a video actually belongs to the current lesson"""
+    if not video_url or not lesson_title:
+        return False
+    
+    # Check if we have cached validation result
+    cache_key = f"{video_url}|{lesson_title}"
+    if cache_key in LESSON_CONTEXT['lesson_validation_cache']:
+        cached_result = LESSON_CONTEXT['lesson_validation_cache'][cache_key]
+        print(f"🔍 Using cached lesson validation result: {cached_result['valid']}")
+        return cached_result['valid']
+    
+    print(f"🔍 VALIDATING VIDEO BELONGS TO LESSON: {lesson_title}")
+    print(f"   🎥 Video: {video_url}")
+    
+    validation_result = {
+        'valid': False,
+        'reason': 'unknown',
+        'confidence': 0.0
+    }
+    
+    try:
+        # Method 1: Check if video URL contains lesson-specific identifiers
+        lesson_identifiers = _extract_lesson_identifiers(lesson_title)
+        url_lower = video_url.lower()
+        
+        for identifier in lesson_identifiers:
+            if identifier.lower() in url_lower:
+                validation_result['valid'] = True
+                validation_result['reason'] = 'url_contains_lesson_identifier'
+                validation_result['confidence'] = 0.8
+                print(f"✅ URL contains lesson identifier: {identifier}")
+                break
+        
+        # Method 2: Check if we're on the correct lesson page
+        if driver and LESSON_CONTEXT['current_lesson_url']:
+            current_url = driver.current_url
+            if current_url == LESSON_CONTEXT['current_lesson_url']:
+                validation_result['valid'] = True
+                validation_result['reason'] = 'correct_lesson_page'
+                validation_result['confidence'] = 0.9
+                print(f"✅ On correct lesson page: {current_url}")
+        
+        # Method 3: Check page content for lesson relevance
+        if driver and validation_result['confidence'] < 0.8:
+            page_relevance = _check_page_content_relevance(driver, lesson_title, video_url)
+            if page_relevance > 0.7:
+                validation_result['valid'] = True
+                validation_result['reason'] = 'page_content_relevant'
+                validation_result['confidence'] = page_relevance
+                print(f"✅ Page content relevant to lesson (confidence: {page_relevance:.2f})")
+        
+        # Method 4: Check if video was found in lesson-specific containers
+        if validation_result['confidence'] < 0.6:
+            container_relevance = _check_video_container_relevance(driver, lesson_title)
+            if container_relevance > 0.6:
+                validation_result['valid'] = True
+                validation_result['reason'] = 'lesson_specific_container'
+                validation_result['confidence'] = container_relevance
+                print(f"✅ Video found in lesson-specific container (confidence: {container_relevance:.2f})")
+        
+        # Cache the result
+        LESSON_CONTEXT['lesson_validation_cache'][cache_key] = validation_result
+        
+        if validation_result['valid']:
+            print(f"✅ LESSON VALIDATION PASSED: {validation_result['reason']} (confidence: {validation_result['confidence']:.2f})")
+        else:
+            print(f"🚫 LESSON VALIDATION FAILED: {validation_result['reason']} (confidence: {validation_result['confidence']:.2f})")
+        
+        return validation_result['valid']
+        
+    except Exception as e:
+        print(f"⚠️ Lesson validation error: {e}")
+        validation_result['valid'] = False
+        validation_result['reason'] = 'validation_error'
+        validation_result['confidence'] = 0.0
+        
+        # Cache the error result
+        LESSON_CONTEXT['lesson_validation_cache'][cache_key] = validation_result
+        return False
+
+def _extract_lesson_identifiers(lesson_title):
+    """Extract potential identifiers from lesson title for URL matching"""
+    identifiers = []
+    
+    # Add the full lesson title
+    identifiers.append(lesson_title)
+    
+    # Extract key words (remove common words)
+    common_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'this', 'that', 'these', 'those'}
+    
+    words = lesson_title.lower().split()
+    key_words = [word for word in words if word not in common_words and len(word) > 2]
+    
+    # Add key word combinations
+    for i in range(len(key_words)):
+        identifiers.append(key_words[i])
+        if i < len(key_words) - 1:
+            identifiers.append(f"{key_words[i]}-{key_words[i+1]}")
+    
+    # Add lesson number if present
+    import re
+    lesson_number_match = re.search(r'(\d+)', lesson_title)
+    if lesson_number_match:
+        identifiers.append(lesson_number_match.group(1))
+    
+    return identifiers
+
+def _check_page_content_relevance(driver, lesson_title, video_url):
+    """Check if page content is relevant to the lesson and video"""
+    try:
+        # Get page content
+        page_text = driver.find_element(By.TAG_NAME, "body").text.lower()
+        lesson_lower = lesson_title.lower()
+        
+        # Check for lesson title in page content
+        title_present = lesson_lower in page_text
+        if title_present:
+            print(f"✅ Lesson title found in page content")
+        
+        # Check for video-related content near lesson title
+        video_keywords = ['video', 'watch', 'play', 'lesson', 'tutorial', 'demo']
+        video_context_present = any(keyword in page_text for keyword in video_keywords)
+        
+        # Calculate relevance score
+        relevance_score = 0.0
+        if title_present:
+            relevance_score += 0.4
+        if video_context_present:
+            relevance_score += 0.3
+        
+        # Check if video URL appears in page content
+        if video_url in page_text:
+            relevance_score += 0.3
+            print(f"✅ Video URL found in page content")
+        
+        return min(relevance_score, 1.0)
+        
+    except Exception as e:
+        print(f"⚠️ Error checking page content relevance: {e}")
+        return 0.0
+
+def _check_video_container_relevance(driver, lesson_title):
+    """Check if video was found in lesson-specific containers"""
+    try:
+        # Look for lesson-specific containers
+        lesson_containers = driver.find_elements(By.CSS_SELECTOR, 
+            '[class*="lesson"], [class*="content"], [class*="video"], [class*="player"]')
+        
+        if lesson_containers:
+            print(f"✅ Found {len(lesson_containers)} lesson-specific containers")
+            return 0.7  # Good confidence if lesson containers exist
+        
+        return 0.3  # Low confidence if no lesson containers found
+        
+    except Exception as e:
+        print(f"⚠️ Error checking container relevance: {e}")
+        return 0.0
+
+def log_video_extraction_attempt(method_name, lesson_title, video_url, result_status, additional_info=None):
+    """Enhanced logging for video extraction attempts with detailed tracking"""
+    import datetime
+    
+    log_entry = {
+        'timestamp': datetime.datetime.now().isoformat(),
+        'method': method_name,
+        'lesson_title': lesson_title or 'Unknown Lesson',
+        'video_url': video_url,
+        'status': result_status,  # 'found', 'blocked', 'failed', 'none'
+        'additional_info': additional_info or {}
+    }
+    
+    VIDEO_EXTRACTION_DEBUG_LOG.append(log_entry)
+    
+    # Enhanced console output with color coding
+    status_symbol = {
+        'found': '✅',
+        'blocked': '🚫', 
+        'failed': '❌',
+        'none': '⚪'
+    }.get(result_status, '❓')
+    
+    print(f"{status_symbol} [{method_name}] {lesson_title}: {result_status.upper()} - {video_url or 'No URL'}")
+    if additional_info:
+        for key, value in additional_info.items():
+            print(f"    ├─ {key}: {value}")
+
+def save_extraction_debug_log():
+    """Save the complete extraction debug log to file for analysis"""
+    try:
+        import json
+        with open('debug_video_extraction_log.json', 'w', encoding='utf-8') as f:
+            json.dump(VIDEO_EXTRACTION_DEBUG_LOG, f, indent=2, ensure_ascii=False)
+        print(f"📄 Saved video extraction debug log with {len(VIDEO_EXTRACTION_DEBUG_LOG)} entries")
+    except Exception as e:
+        print(f"⚠️ Failed to save debug log: {e}")
+
+def analyze_duplicate_patterns():
+    """Analyze the debug log for duplicate video patterns"""
+    if not VIDEO_EXTRACTION_DEBUG_LOG:
+        return
+    
+    print("\n🔍 === DUPLICATE PATTERN ANALYSIS ===")
+    
+    # Group by video URL
+    from collections import defaultdict
+    url_occurrences = defaultdict(list)
+    
+    for entry in VIDEO_EXTRACTION_DEBUG_LOG:
+        if entry['video_url'] and entry['status'] == 'found':
+            url_occurrences[entry['video_url']].append(entry)
+    
+    duplicates_found = False
+    for url, entries in url_occurrences.items():
+        if len(entries) > 1:
+            duplicates_found = True
+            print(f"\n🚨 DUPLICATE DETECTED: {url}")
+            print(f"   📊 Found in {len(entries)} lessons:")
+            for entry in entries:
+                print(f"      └─ [{entry['method']}] {entry['lesson_title']} at {entry['timestamp']}")
+            
+            # Identify which methods found this duplicate
+            methods = [entry['method'] for entry in entries]
+            print(f"   🔧 Methods involved: {', '.join(set(methods))}")
+    
+    if not duplicates_found:
+        print("✅ No duplicate videos found in this session!")
+    
+    print("=" * 50)
 
 def extract_community_info_from_url(url):
     """
@@ -293,6 +1054,11 @@ def setup_driver():
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option('useAutomationExtension', False)
     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    # Enable performance logging to sniff media requests when needed
+    try:
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+    except Exception:
+        pass
     
     driver = webdriver.Chrome(options=options)
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
@@ -870,6 +1636,19 @@ def clean_video_url(video_url, platform):
     if platform == 'youtube':
         # Extract video ID from various YouTube URL formats
         import re
+        from urllib.parse import urlparse, parse_qs, unquote
+
+        # Handle oEmbed wrapper: https://www.youtube.com/oembed?format=json&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DID
+        if 'youtube.com/oembed' in video_url:
+            try:
+                parsed = urlparse(video_url)
+                q = parse_qs(parsed.query)
+                wrapped = q.get('url', [None])[0]
+                if wrapped:
+                    wrapped = unquote(wrapped)
+                    return clean_video_url(wrapped, 'youtube')
+            except Exception:
+                pass
         
         # Handle embed URLs: https://www.youtube.com/embed/Ch-AWxvX2Jc?params...
         embed_match = re.search(r'youtube\.com/embed/([a-zA-Z0-9_-]{11})', video_url)
@@ -2356,10 +3135,11 @@ def detect_modal_video_player(driver, known_video_id=None):
         print(f"❌ Modal video detection error: {e}")
         return None
 
-def extract_video_url(driver):
-    """Enhanced video extraction supporting multiple platforms and modal popups"""
+def extract_video_url(driver, lesson_title=None):
+    """Enhanced video extraction supporting multiple platforms and modal popups with comprehensive debugging"""
     
-    print("🔍 === STARTING ENHANCED VIDEO EXTRACTION PROCESS ===")
+    lesson_title = lesson_title or "Unknown Lesson"
+    print(f"🔍 === STARTING ENHANCED VIDEO EXTRACTION FOR: {lesson_title} ===")
     
     # Method 0: NEW - Modal video detection (for new classroom formats)
     print("🔍 METHOD 0: Modal video detection...")
@@ -2371,23 +3151,42 @@ def extract_video_url(driver):
         if json_result and json_result.get('url', '').startswith('skool-video-id:'):
             skool_video_id = json_result['url'].replace('skool-video-id:', '')
             print(f"🎯 Found Skool video ID from JSON: {skool_video_id}")
-    except:
-        pass
+    except Exception as e:
+        log_video_extraction_attempt('METHOD_0_JSON_PREP', lesson_title, None, 'failed', 
+                                   {'error': str(e), 'step': 'skool_video_id_extraction'})
     
     video_data = detect_modal_video_player(driver, skool_video_id)
     if video_data:
         video_url = video_data.get('url')
         print(f"🔍 Modal method found URL: {video_url}")
-        if is_valid_lesson_video(video_url):
+        
+        log_video_extraction_attempt('METHOD_0_MODAL', lesson_title, video_url, 'found', 
+                                   {'platform': video_data.get('platform'), 'source': video_data.get('source')})
+        
+        # Early session duplicate check
+        if check_session_duplicate_early(video_url, lesson_title, 'METHOD_0_MODAL'):
+            log_video_extraction_attempt('METHOD_0_MODAL', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 0 BLOCKED - Early session duplicate detected: {video_url}")
+        elif is_valid_lesson_video(video_url):
             print(f"✅ METHOD 0 SUCCESS - Valid video from modal: {video_url}")
             # NUCLEAR VALIDATION: Final check before return
-            final_result = _final_video_validation(video_data)
+            final_result = _final_video_validation(video_data, lesson_title, 'METHOD_0_MODAL', driver)
             if final_result:
+                log_video_extraction_attempt('METHOD_0_FINAL', lesson_title, video_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
                 return final_result
+            else:
+                log_video_extraction_attempt('METHOD_0_FINAL', lesson_title, video_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
         else:
+            log_video_extraction_attempt('METHOD_0_MODAL', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'failed_validation'})
             print(f"🚫 METHOD 0 BLOCKED - Rejected cached video from modal: {video_url}")
     else:
         print("⚠️ METHOD 0 - No video found in modal")
+        log_video_extraction_attempt('METHOD_0_MODAL', lesson_title, None, 'none', 
+                                   {'reason': 'no_modal_video_detected'})
     
     # Method 1: JSON data extraction (most reliable)
     print("🔍 METHOD 1: JSON data extraction...")
@@ -2396,19 +3195,38 @@ def extract_video_url(driver):
         video_url = video_data.get('url')
         print(f"🔍 JSON method found URL: {video_url}")
         
+        log_video_extraction_attempt('METHOD_1_JSON', lesson_title, video_url, 'found', 
+                                   {'platform': video_data.get('platform'), 'source': 'next_data_json'})
+        
         # Skip Skool video IDs - these need modal interaction
         if video_url and video_url.startswith('skool-video-id:'):
             print(f"⚠️ METHOD 1 - Found Skool video ID, need modal interaction: {video_url}")
+            log_video_extraction_attempt('METHOD_1_JSON', lesson_title, video_url, 'none', 
+                                       {'reason': 'skool_video_id_needs_modal'})
+        # Early session duplicate check
+        elif check_session_duplicate_early(video_url, lesson_title, 'METHOD_1_JSON'):
+            log_video_extraction_attempt('METHOD_1_JSON', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 1 BLOCKED - Early session duplicate detected: {video_url}")
         elif is_valid_lesson_video(video_url):
             print(f"✅ METHOD 1 SUCCESS - Valid video from JSON: {video_url}")
             # NUCLEAR VALIDATION: Final check before return
-            final_result = _final_video_validation(video_data)
+            final_result = _final_video_validation(video_data, lesson_title, 'METHOD_1_JSON', driver)
             if final_result:
+                log_video_extraction_attempt('METHOD_1_FINAL', lesson_title, video_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
                 return final_result
+            else:
+                log_video_extraction_attempt('METHOD_1_FINAL', lesson_title, video_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
         else:
+            log_video_extraction_attempt('METHOD_1_JSON', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'failed_validation'})
             print(f"🚫 METHOD 1 BLOCKED - Rejected cached video from JSON: {video_url}")
     else:
         print("⚠️ METHOD 1 - No video found in JSON")
+        log_video_extraction_attempt('METHOD_1_JSON', lesson_title, None, 'none', 
+                                   {'reason': 'no_json_video_data'})
     
     # Method 2: Try clicking video player to trigger video load
     print("🔍 METHOD 2: Click video player extraction...")
@@ -2416,16 +3234,34 @@ def extract_video_url(driver):
     if video_data:
         video_url = video_data.get('url')
         print(f"🔍 Click method found URL: {video_url}")
-        if is_valid_lesson_video(video_url):
+        
+        log_video_extraction_attempt('METHOD_2_CLICK', lesson_title, video_url, 'found', 
+                                   {'platform': video_data.get('platform'), 'source': video_data.get('source')})
+        
+        # Early session duplicate check
+        if check_session_duplicate_early(video_url, lesson_title, 'METHOD_2_CLICK'):
+            log_video_extraction_attempt('METHOD_2_CLICK', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 2 BLOCKED - Early session duplicate detected: {video_url}")
+        elif is_valid_lesson_video(video_url):
             print(f"✅ METHOD 2 SUCCESS - Valid video from click: {video_url}")
             # NUCLEAR VALIDATION: Final check before return
-            final_result = _final_video_validation(video_data)
+            final_result = _final_video_validation(video_data, lesson_title, 'METHOD_2_CLICK', driver)
             if final_result:
+                log_video_extraction_attempt('METHOD_2_FINAL', lesson_title, video_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
                 return final_result
+            else:
+                log_video_extraction_attempt('METHOD_2_FINAL', lesson_title, video_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
         else:
+            log_video_extraction_attempt('METHOD_2_CLICK', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'failed_validation'})
             print(f"🚫 METHOD 2 BLOCKED - Rejected cached video from click: {video_url}")
     else:
         print("⚠️ METHOD 2 - No video found via click")
+        log_video_extraction_attempt('METHOD_2_CLICK', lesson_title, None, 'none', 
+                                   {'reason': 'no_click_video_found'})
     
     # Method 3: iframe scanning (all platforms) with better filtering
     print("🔍 METHOD 3: Iframe scanning extraction...")
@@ -2433,24 +3269,80 @@ def extract_video_url(driver):
     if video_data:
         video_url = video_data.get('url')
         print(f"🔍 Iframe method found URL: {video_url}")
-        if is_valid_lesson_video(video_url):
+        
+        log_video_extraction_attempt('METHOD_3_IFRAME', lesson_title, video_url, 'found', 
+                                   {'platform': video_data.get('platform'), 'source': video_data.get('source')})
+        
+        # Early session duplicate check
+        if check_session_duplicate_early(video_url, lesson_title, 'METHOD_3_IFRAME'):
+            log_video_extraction_attempt('METHOD_3_IFRAME', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 3 BLOCKED - Early session duplicate detected: {video_url}")
+        elif is_valid_lesson_video(video_url):
             print(f"✅ METHOD 3 SUCCESS - Valid video from iframe: {video_url}")
             # NUCLEAR VALIDATION: Final check before return
-            final_result = _final_video_validation(video_data)
+            final_result = _final_video_validation(video_data, lesson_title, 'METHOD_3_IFRAME', driver)
             if final_result:
+                log_video_extraction_attempt('METHOD_3_FINAL', lesson_title, video_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
                 return final_result
+            else:
+                log_video_extraction_attempt('METHOD_3_FINAL', lesson_title, video_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
         else:
+            log_video_extraction_attempt('METHOD_3_IFRAME', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'failed_validation'})
             print(f"🚫 METHOD 3 BLOCKED - Rejected cached video from iframe: {video_url}")
     else:
         print("⚠️ METHOD 3 - No video found in iframes")
+        log_video_extraction_attempt('METHOD_3_IFRAME', lesson_title, None, 'none', 
+                                   {'reason': 'no_iframe_video_found'})
     
-    # Method 4: Legacy YouTube extraction as final fallback
-    print("🔍 METHOD 4: Legacy YouTube extraction...")
+    # Method 4: Network logs inspection for media URLs (HLS/MP4 or hidden player requests)
+    print("🔍 METHOD 4: Inspecting network logs for media URLs...")
+    net_video = _extract_video_from_network_logs(driver)
+    if net_video:
+        video_url = net_video.get('url')
+        print(f"🔍 Network method found URL: {video_url}")
+        
+        log_video_extraction_attempt('METHOD_4_NETWORK', lesson_title, video_url, 'found', 
+                                   {'platform': net_video.get('platform'), 'source': 'network_logs'})
+        
+        # Early session duplicate check
+        if check_session_duplicate_early(video_url, lesson_title, 'METHOD_4_NETWORK'):
+            log_video_extraction_attempt('METHOD_4_NETWORK', lesson_title, video_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 4 BLOCKED - Early session duplicate detected: {video_url}")
+        else:
+            final_result = _final_video_validation(net_video, lesson_title, 'METHOD_4_NETWORK', driver)
+            if final_result:
+                log_video_extraction_attempt('METHOD_4_FINAL', lesson_title, video_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
+                return final_result
+            else:
+                log_video_extraction_attempt('METHOD_4_FINAL', lesson_title, video_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
+    else:
+        print("⚠️ METHOD 4 - No media found in network logs")
+        log_video_extraction_attempt('METHOD_4_NETWORK', lesson_title, None, 'none', 
+                                   {'reason': 'no_network_media_found'})
+
+    # Method 5: Legacy YouTube extraction as final fallback
+    print("🔍 METHOD 5: Legacy YouTube extraction...")
     youtube_url = extract_youtube_url_legacy(driver)
     if youtube_url:
         print(f"🔍 Legacy method found URL: {youtube_url}")
-        if is_valid_lesson_video(youtube_url):
-            print(f"✅ METHOD 4 SUCCESS - Valid video from legacy: {youtube_url}")
+        
+        log_video_extraction_attempt('METHOD_5_LEGACY', lesson_title, youtube_url, 'found', 
+                                   {'platform': 'youtube', 'source': 'legacy_extraction'})
+        
+        # Early session duplicate check
+        if check_session_duplicate_early(youtube_url, lesson_title, 'METHOD_5_LEGACY'):
+            log_video_extraction_attempt('METHOD_5_LEGACY', lesson_title, youtube_url, 'blocked', 
+                                       {'reason': 'early_session_duplicate'})
+            print(f"🚫 METHOD 5 BLOCKED - Early session duplicate detected: {youtube_url}")
+        elif is_valid_lesson_video(youtube_url):
+            print(f"✅ METHOD 5 SUCCESS - Valid video from legacy: {youtube_url}")
             video_data = {
                 'url': youtube_url,
                 'platform': 'youtube',
@@ -2458,22 +3350,91 @@ def extract_video_url(driver):
                 'duration': None
             }
             # NUCLEAR VALIDATION: Final check before return
-            final_result = _final_video_validation(video_data)
+            final_result = _final_video_validation(video_data, lesson_title, 'METHOD_5_LEGACY', driver)
             if final_result:
+                log_video_extraction_attempt('METHOD_5_FINAL', lesson_title, youtube_url, 'found', 
+                                           {'validation': 'passed', 'final_url': final_result.get('url')})
                 return final_result
+            else:
+                log_video_extraction_attempt('METHOD_5_FINAL', lesson_title, youtube_url, 'blocked', 
+                                           {'validation': 'failed_final_check'})
         else:
-            print(f"🚫 METHOD 4 BLOCKED - Rejected cached video from legacy: {youtube_url}")
+            log_video_extraction_attempt('METHOD_5_LEGACY', lesson_title, youtube_url, 'blocked', 
+                                       {'reason': 'failed_validation'})
+            print(f"🚫 METHOD 5 BLOCKED - Rejected cached video from legacy: {youtube_url}")
     else:
-        print("⚠️ METHOD 4 - No video found via legacy")
+        print("⚠️ METHOD 5 - No video found via legacy")
+        log_video_extraction_attempt('METHOD_5_LEGACY', lesson_title, None, 'none', 
+                                   {'reason': 'no_legacy_video_found'})
     
+    log_video_extraction_attempt('ALL_METHODS', lesson_title, None, 'failed', 
+                               {'reason': 'all_extraction_methods_failed'})
     print("❌ === NO VALID VIDEO FOUND WITH ANY METHOD ===")
     return None
 
-def _final_video_validation(video_data):
+def _extract_video_from_network_logs(driver):
+    """Inspect performance logs for media URLs and return canonicalized video data if found."""
+    try:
+        logs = []
+        try:
+            logs = driver.get_log('performance')
+        except Exception:
+            pass
+        def _is_probable_video_url(url: str) -> bool:
+            u = (url or '').lower()
+            # Exclude common image assets
+            if any(u.endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']):
+                return False
+            # Accept direct media files or HLS
+            if any(ext in u for ext in ['.m3u8', '.mp4', '.webm', '.mov']):
+                return True
+            # Accept known player/embeds incl. oEmbed
+            if ('youtube.com' in u or 'youtu.be' in u or 'vimeo.com' in u or 'loom.com' in u or
+                'fast.wistia.net/embed/iframe/' in u or 'wistia.com/medias/' in u or 'oembed?format=json&url=' in u):
+                return True
+            # Exclude Wistia delivery images
+            if 'wistia' in u and 'deliveries' in u:
+                return False
+            return False
+
+        candidates = []
+        for entry in logs:
+            try:
+                msg = json.loads(entry.get('message', '{}'))
+                params = msg.get('message', {}).get('params', {})
+                request = params.get('request', {})
+                response = params.get('response', {})
+                url = request.get('url') or response.get('url')
+                if not url:
+                    continue
+                if _is_probable_video_url(url):
+                    candidates.append(url)
+            except Exception:
+                continue
+        if not candidates:
+            return None
+        # Prefer canonicalized player URLs
+        prioritized = sorted(candidates, key=lambda u: (('oembed' in u), ('m3u8' not in u and '.mp4' not in u)))
+        best = prioritized[0]
+        platform = detect_platform(best)
+        clean_url = clean_video_url(best, platform)
+        return {
+            'url': clean_url,
+            'platform': platform,
+            'source': 'network_logs'
+        }
+    except Exception as e:
+        print(f"⚠️ Network log inspection failed: {e}")
+        return None
+
+def _final_video_validation(video_data, lesson_title=None, extraction_method=None, driver=None):
     """NUCLEAR OPTION: Final validation checkpoint that NO duplicate can bypass"""
     if not video_data or not isinstance(video_data, dict):
         print("🚫 FINAL VALIDATION: Invalid video data structure")
         return None
+    
+    lesson_title = lesson_title or "Unknown Lesson"
+    extraction_method = extraction_method or "Unknown Method"
     
     # Ensure canonical URL before validation and dedup
     video_url = video_data.get('url')
@@ -2492,15 +3453,18 @@ def _final_video_validation(video_data):
     
     # Re-run validation one more time as absolute final check
     if is_valid_lesson_video(video_url):
-        # Session-level duplicate guard
-        video_id = _extract_video_id_generic(video_url)
-        if video_id:
-            if video_id in SEEN_VIDEO_IDS_SESSION:
-                print(f"🚫 FINAL VALIDATION FAILED: Duplicate video in this session - {video_id}")
+        # NEW: Lesson-specific validation
+        if validate_video_belongs_to_lesson(video_url, lesson_title, driver):
+            # Enhanced session-level duplicate guard with comprehensive tracking
+            if register_video_in_session(video_url, lesson_title, extraction_method, platform):
+                print(f"✅ FINAL VALIDATION PASSED: Video is valid, lesson-relevant, and registered - {video_url}")
+                return video_data
+            else:
+                print(f"🚫 FINAL VALIDATION FAILED: Session duplicate detected - {video_url}")
                 return None
-            SEEN_VIDEO_IDS_SESSION.add(video_id)
-        print(f"✅ FINAL VALIDATION PASSED: Video is valid - {video_url}")
-        return video_data
+        else:
+            print(f"🚫 FINAL VALIDATION FAILED: Video does not belong to lesson - {video_url}")
+            return None
     else:
         print(f"🚫 FINAL VALIDATION FAILED: Video blocked at final checkpoint - {video_url}")
         return None
@@ -2947,6 +3911,65 @@ def process_lessons_with_direct_urls(driver, lesson_data, output_dirs, collectio
             continue
         
         try:
+            # Check if we should use browser isolation for this lesson
+            use_isolation = should_use_browser_isolation(lesson_title, i, len(lesson_data))
+            
+            if use_isolation:
+                # Process lesson with completely isolated browser
+                lesson_url = base_url + md_value
+                result = process_lesson_with_isolated_browser(
+                    lesson_title, lesson_url, lesson_id, email, password, 
+                    download_videos, output_dirs, community_display_name, community_slug
+                )
+                
+                if result is True:
+                    stats['processed'] += 1
+                    print(f"✅ Successfully processed with isolated browser: {lesson_title}")
+                elif isinstance(result, dict):
+                    # Extract data was successful, now save it
+                    video_data = result['video_data']
+                    content = result['content']
+                    images_downloaded = result['images_downloaded']
+                    
+                    # Save lesson content with hierarchical structure
+                    if content['text_content'] or video_data or images_downloaded:
+                        # Find hierarchical path for this lesson
+                        lesson_hierarchy_path = find_lesson_hierarchy_path(lesson_title, hierarchy)
+                        
+                        # Extract community slug from the lesson data context
+                        community_slug = collection_url.split('/')[-3] if '/' in collection_url else None
+                        
+                        # Create hierarchical directories for this specific lesson
+                        if lesson_hierarchy_path:
+                            hierarchical_dirs = create_hierarchical_lesson_directories(community_display_name, community_slug, lesson_hierarchy_path)
+                            print(f"📁 Using hierarchical path: {lesson_hierarchy_path}")
+                        else:
+                            # Fallback to original structure if no hierarchy found
+                            hierarchical_dirs = output_dirs
+                            print(f"📁 Using flat structure (no hierarchy found for: {lesson_title})")
+                        
+                        if save_lesson_content(lesson_title, video_data, content, images_downloaded, hierarchical_dirs, False, community_display_name, community_slug):
+                            stats['processed'] += 1
+                            print(f"✅ Successfully processed with isolated browser: {lesson_title}")
+                        else:
+                            stats['failed'] += 1
+                            failed_lessons.append(lesson_title)
+                            print(f"❌ Failed to save: {lesson_title}")
+                    else:
+                        print(f"⚠️ No content found for: {lesson_title}")
+                        stats['failed'] += 1
+                        failed_lessons.append(lesson_title)
+                else:
+                    stats['failed'] += 1
+                    failed_lessons.append(lesson_title)
+                    print(f"❌ Failed to process with isolated browser: {lesson_title}")
+                
+                # Skip the rest of the shared browser processing
+                continue
+            
+            # Use shared browser with enhanced isolation
+            BROWSER_ISOLATION['isolation_stats']['lessons_with_shared_browser'] += 1
+            
             # Aggressive state isolation before each lesson to avoid cross-lesson contamination
             clear_browser_storage_bulk(driver)
             # Navigate directly to the lesson URL
@@ -2956,8 +3979,14 @@ def process_lessons_with_direct_urls(driver, lesson_data, output_dirs, collectio
             driver.get(lesson_url)
             time.sleep(3)  # Wait for page to load
             
+            # Set lesson context for validation
+            set_lesson_context(lesson_title, lesson_url, lesson_id)
+            
+            # Generate lesson content signature for validation
+            generate_lesson_content_signature(driver, lesson_title)
+            
             # Extract Video URL (Universal - YouTube, Vimeo, etc.)
-            video_data = extract_video_url(driver)
+            video_data = extract_video_url(driver, lesson_title)
             
             # Download video if found and requested (Phase 2 - Universal Video Download)
             video_downloaded = False
@@ -3004,6 +4033,7 @@ def process_lessons_with_direct_urls(driver, lesson_data, output_dirs, collectio
                 
                 if save_lesson_content(lesson_title, video_data, content, images_downloaded, hierarchical_dirs, video_downloaded, community_display_name, community_slug):
                     stats['processed'] += 1
+                    SESSION_STATS['lessons_processed'] += 1
                     print(f"✅ Successfully processed: {lesson_title}")
                 else:
                     stats['failed'] += 1
@@ -3062,6 +4092,9 @@ def process_lessons_with_direct_urls(driver, lesson_data, output_dirs, collectio
 
 def process_single_lesson(lesson_url, email, password, download_video=False):
     """Process a single lesson URL with proper navigation handling"""
+    # Initialize session tracking for single lesson
+    reset_session_tracking()
+    
     print(f"🎯 SINGLE LESSON EXTRACTOR")
     print(f"🔗 Target URL: {lesson_url}")
     print(f"📥 Download Video: {'Yes' if download_video else 'No (URLs only)'}")
@@ -3110,9 +4143,15 @@ def process_single_lesson(lesson_url, email, password, download_video=False):
         
         print(f"📖 Lesson Name: {lesson_name}")
         
+        # Set lesson context for validation
+        set_lesson_context(lesson_name, lesson_url, lesson_id)
+        
+        # Generate lesson content signature for validation
+        generate_lesson_content_signature(driver, lesson_name)
+        
         # Extract video with enhanced modal detection
         print(f"\n🎥 Extracting video...")
-        video_data = extract_video_url(driver)
+        video_data = extract_video_url(driver, lesson_name)
         
         # Extract content
         print(f"\n📝 Extracting content...")
@@ -3135,6 +4174,7 @@ def process_single_lesson(lesson_url, email, password, download_video=False):
         )
         
         if success:
+            SESSION_STATS['lessons_processed'] += 1
             print(f"\n🎉 SUCCESS! Single lesson extracted and saved.")
             print(f"📁 Location: {output_dirs['lessons']}/{sanitize_filename(lesson_name)}.md")
             if video_data:
@@ -3152,6 +4192,16 @@ def process_single_lesson(lesson_url, email, password, download_video=False):
         traceback.print_exc()
         return False
     finally:
+        print("\n📊 Saving extraction debug logs and analyzing patterns...")
+        try:
+            save_extraction_debug_log()
+            analyze_duplicate_patterns()
+            print_session_statistics()
+            print_browser_isolation_statistics()
+            save_session_tracking_report()
+        except Exception as debug_error:
+            print(f"⚠️ Debug analysis failed: {debug_error}")
+        
         driver.quit()
         print(f"\n🌐 Browser closed.")
 
@@ -3303,6 +4353,9 @@ def extract_content_simple(driver):
         }
 
 def main():
+    # Initialize session tracking for this scraping session
+    reset_session_tracking()
+    
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Extract content from Skool.com classroom collections with hierarchical structure')
     parser.add_argument('url', help='The Skool.com collection URL to extract content from')
@@ -3401,6 +4454,16 @@ def main():
     except Exception as e:
         print(f"❌ Fatal error: {str(e)}")
     finally:
+        print("\n📊 Saving extraction debug logs and analyzing patterns...")
+        try:
+            save_extraction_debug_log()
+            analyze_duplicate_patterns()
+            print_session_statistics()
+            print_browser_isolation_statistics()
+            save_session_tracking_report()
+        except Exception as debug_error:
+            print(f"⚠️ Debug analysis failed: {debug_error}")
+        
         print("\n🔒 Closing browser...")
         driver.quit()
 

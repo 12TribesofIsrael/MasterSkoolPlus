@@ -1,0 +1,1316 @@
+{
+  "props": {
+    "pageProps": {
+      "settings": {
+        "mainMenuItem": "classroom",
+        "mainMenuName": "group-default",
+        "pageTitle": "n8n Basics - Build your first AI Agent \u00b7 New Society",
+        "pageMeta": {
+          "description": "Build your own AI Startup. Scale to $10,000 MRR.",
+          "image": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b0df9edb54aa4aafa084c9d3072358c7365f2f0246f4440e99721f206ddb7d14",
+          "title": "n8n Basics - Build your first AI Agent \u00b7 New Society",
+          "touchIcon": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b7a24ef2eacc47ba8014fbc11437e7a044779dde0d0d426dace2c54651f69a41"
+        },
+        "previousPageBack": false,
+        "courseRoute": false
+      },
+      "selectedModule": "e667d013dddd4bdfa7f167f66b2ebcc8",
+      "course": {
+        "course": {
+          "id": "1ed5b7f46ac24a94bb9dcca75483ba76",
+          "name": "f767704b",
+          "metadata": {
+            "coverImage": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b0df9edb54aa4aafa084c9d3072358c7365f2f0246f4440e99721f206ddb7d14",
+            "desc": "Learn how to build AI Agents - even if you've never coded before!",
+            "hasAccess": 1,
+            "numModules": 8,
+            "privacy": 0,
+            "title": "Build your first AI Agent"
+          },
+          "createdAt": "2024-03-17T21:50:43.737363Z",
+          "updatedAt": "2025-05-17T16:01:34.10085Z",
+          "unitType": "course",
+          "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+          "userId": "691adfbe67c84406817dea16db13a717",
+          "groupId": "66584e6240cc45a28d79eb60073d11b1",
+          "state": 2,
+          "public": true
+        },
+        "children": [
+          {
+            "course": {
+              "id": "c154c12bfcba4c579656380319fec3d9",
+              "name": "bc7ebd30",
+              "metadata": {
+                "hasAccess": 1,
+                "title": "n8n"
+              },
+              "createdAt": "2025-04-19T15:20:55.810311Z",
+              "updatedAt": "2025-04-19T15:20:55.83039Z",
+              "unitType": "set",
+              "parentId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+              "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+              "userId": "335b9f729273471183939c952e1758b0",
+              "groupId": "66584e6240cc45a28d79eb60073d11b1",
+              "state": 2,
+              "public": true
+            },
+            "children": [
+              {
+                "course": {
+                  "id": "7d109c26ce3a4846a475ce16bc9679bc",
+                  "name": "cd209974",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "AI Agent in n8n \ud83d\udccc"
+                  },
+                  "createdAt": "2025-02-06T15:06:53.64671Z",
+                  "updatedAt": "2025-05-13T16:34:31.2016Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "691adfbe67c84406817dea16db13a717",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "e667d013dddd4bdfa7f167f66b2ebcc8",
+                  "name": "afbaa92a",
+                  "metadata": {
+                    "desc": "[v2][{\"type\":\"paragraph\"}]",
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "n8n Basics"
+                  },
+                  "createdAt": "2025-04-19T15:22:38.013833Z",
+                  "updatedAt": "2025-04-19T15:23:04.687709Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "335b9f729273471183939c952e1758b0",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "21bf72470a3f44789162f2a12ea444f7",
+                  "name": "0d166c0d",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "Connect your Google credentials"
+                  },
+                  "createdAt": "2025-04-24T08:16:36.179778Z",
+                  "updatedAt": "2025-04-24T08:17:09.728743Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "335b9f729273471183939c952e1758b0",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "f08bb63041f34e01ab30afb23067f9cd",
+                  "name": "4f5977fe",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "title": "Create a RAG System"
+                  },
+                  "createdAt": "2025-04-28T19:55:11.748106Z",
+                  "updatedAt": "2025-04-28T19:57:29.467685Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "335b9f729273471183939c952e1758b0",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "bb5833723f8f46b7b7db77dfd55cf3f2",
+                  "name": "6a811253",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "AI Agent or Automation?"
+                  },
+                  "createdAt": "2025-05-02T19:59:19.20084Z",
+                  "updatedAt": "2025-05-02T19:59:28.969534Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "335b9f729273471183939c952e1758b0",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "e48181bc695e42e0987419baa3cd6a4b",
+                  "name": "449c5a40",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "Using Webhooks"
+                  },
+                  "createdAt": "2025-05-08T20:11:22.586541Z",
+                  "updatedAt": "2025-05-08T20:11:32.541549Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "335b9f729273471183939c952e1758b0",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "2e0e50c923104f0693472f4c338724b2",
+                  "name": "7ccf0570",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "Create Sub-Agents"
+                  },
+                  "createdAt": "2025-05-13T17:52:23.996684Z",
+                  "updatedAt": "2025-05-13T17:52:57.300176Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "c0e40938d5ee4749a2cdddf14fb2013c",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              },
+              {
+                "course": {
+                  "id": "64cf1afe5f2649e1b5aa31b1e1176fd5",
+                  "name": "bb70c660",
+                  "metadata": {
+                    "hasAccess": 1,
+                    "resources": "[]",
+                    "title": "How to solve problems?"
+                  },
+                  "createdAt": "2025-05-17T16:01:34.0334Z",
+                  "updatedAt": "2025-05-17T16:02:32.654202Z",
+                  "unitType": "module",
+                  "parentId": "c154c12bfcba4c579656380319fec3d9",
+                  "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                  "userId": "c0e40938d5ee4749a2cdddf14fb2013c",
+                  "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                  "state": 2,
+                  "public": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inProgressDuplication": null,
+      "pinnedPosts": [
+        {
+          "post": {
+            "id": "5018f20b5ed140ef86a5d4acd9641803",
+            "name": "new-module-n8n-basics",
+            "metadata": {
+              "action": 0,
+              "attachmentsEdit": 1745077951366454800,
+              "comments": 16,
+              "content": "This video is exclusive to the New Society\n\nIn this module, you will learn how to create an automation and use the basic flow nodes\n\nThis will be the first module in a new series of modules",
+              "contentEdit": 1745077951366454800,
+              "contributors": "[{\"id\":\"691adfbe67c84406817dea16db13a717\",\"name\":\"davidondrej\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5\"},\"created_at\":\"2024-01-26T20:35:35.5109Z\",\"updated_at\":\"2025-06-03T07:36:18.797356Z\",\"email\":\"\",\"first_name\":\"David\",\"last_name\":\"Ondrej\"},{\"id\":\"8f8168810b9c45df96e0a8ecd3c7fdb9\",\"name\":\"46598913\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/8f8168810b9c45df96e0a8ecd3c7fdb9/14430051768349478f6f50db231c60682bc0742969d44a259435d7e899c0f739-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/8f8168810b9c45df96e0a8ecd3c7fdb9/14430051768349478f6f50db231c60682bc0742969d44a259435d7e899c0f739\"},\"created_at\":\"2024-01-30T22:06:31.434009Z\",\"updated_at\":\"2025-06-02T15:36:34.218547Z\",\"email\":\"\",\"first_name\":\"J\",\"last_name\":\"J\"},{\"id\":\"80c1db06b4804c32a8d4bcd1ef74d854\",\"name\":\"donovan-brown-9270\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/80c1db06b4804c32a8d4bcd1ef74d854/f361057f117c4ef6885bf46b394c5b3836f9f0407e2c47468a3992e0e2f7b389-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/80c1db06b4804c32a8d4bcd1ef74d854/f361057f117c4ef6885bf46b394c5b3836f9f0407e2c47468a3992e0e2f7b389-md.jpg\"},\"created_at\":\"2024-12-24T03:28:42.611823Z\",\"updated_at\":\"2025-06-03T05:15:10.924389Z\",\"email\":\"\",\"first_name\":\"Donovan\",\"last_name\":\"Brown\"},{\"id\":\"17335f906ab24322aad8faebd78c459d\",\"name\":\"ross-beatty-4722\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/17335f906ab24322aad8faebd78c459d/7262f704c3984d98b78419e9adb36e4a97ebf670f3c249d29329a42856ad894b-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/17335f906ab24322aad8faebd78c459d/7262f704c3984d98b78419e9adb36e4a97ebf670f3c249d29329a42856ad894b-md.jpg\"},\"created_at\":\"2025-03-26T21:13:36.896545Z\",\"updated_at\":\"2025-06-03T03:45:55.213863Z\",\"email\":\"\",\"first_name\":\"Ross\",\"last_name\":\"Beatty\"},{\"id\":\"aa97aa0aefed477898be91276fa1ca05\",\"name\":\"marco-talladira-3969\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/aa97aa0aefed477898be91276fa1ca05/09666120a26e4a4ea63e8da8b066a9f80682c13af4844cafb025f52acadcefe0-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/aa97aa0aefed477898be91276fa1ca05/09666120a26e4a4ea63e8da8b066a9f80682c13af4844cafb025f52acadcefe0-md.jpg\"},\"created_at\":\"2025-05-09T21:32:53.79303Z\",\"updated_at\":\"2025-06-03T08:02:12.493029Z\",\"email\":\"\",\"first_name\":\"Marco\",\"last_name\":\"Talladira\"}]",
+              "imagePreview": "https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540",
+              "imagePreviewSmall": "https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540",
+              "labels": "eecfb4638bea48699127d210204d5887",
+              "lastComment": 1748937772625785000,
+              "lastCommentId": "b6c9fb5ff3ec4488afda92e05cb0592b",
+              "lastCommentView": 1748937772625785000,
+              "myView": 1755481722685835500,
+              "pinnedModule": "e667d013dddd4bdfa7f167f66b2ebcc8",
+              "rca": "2|1748937772625785000",
+              "title": "\ud83d\udd25 NEW MODULE: n8n basics",
+              "titleEdit": 1745077951366454800,
+              "upvotes": 23,
+              "videoLinks": "https://ondrejdavidbusiness.wistia.com/medias/3qsmpupw97",
+              "videoLinksData": "[{\"url\":\"https://ondrejdavidbusiness.wistia.com/medias/3qsmpupw97\",\"provider\":4,\"video_id\":\"3qsmpupw97\",\"thumbnail\":\"https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540\",\"len_ms\":645500,\"title\":\"n8n_fundamentals\"}]",
+              "videoLinksEdit": 1745077951366454800
+            },
+            "createdAt": "2025-04-19T15:29:28.429057Z",
+            "updatedAt": "2025-06-19T22:06:39.906654Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1",
+            "userId": "335b9f729273471183939c952e1758b0",
+            "postType": "generic",
+            "rootId": "5018f20b5ed140ef86a5d4acd9641803",
+            "labelId": "eecfb4638bea48699127d210204d5887",
+            "user": {
+              "id": "335b9f729273471183939c952e1758b0",
+              "name": "maty",
+              "metadata": {
+                "bio": "Student - Sports - Interested in AI",
+                "lastOffline": 1755350207852774100,
+                "linkFacebook": "",
+                "linkInstagram": "",
+                "linkLinkedin": "",
+                "linkTwitter": "",
+                "linkWebsite": "",
+                "linkYoutube": "",
+                "location": "Czech Republic",
+                "myersBriggs": "INFJ",
+                "pictureBubble": "https://assets.skool.com/f/335b9f729273471183939c952e1758b0/4ce86b35a79c4290a6544198c62d72cf2ba25dd79f8649beb2426df8a8eed7b3-sm.jpg",
+                "pictureProfile": "https://assets.skool.com/f/335b9f729273471183939c952e1758b0/4ce86b35a79c4290a6544198c62d72cf2ba25dd79f8649beb2426df8a8eed7b3",
+                "spData": "{\"pts\":3143,\"lv\":7,\"pcl\":2015,\"pnl\":8015,\"role\":2}"
+              },
+              "createdAt": "2024-01-26T18:30:37.78863Z",
+              "updatedAt": "2025-08-18T01:19:39.454744Z",
+              "email": "",
+              "firstName": "Maty",
+              "lastName": "Matyk"
+            }
+          }
+        }
+      ],
+      "video": null,
+      "editing": false,
+      "self": {
+        "id": "fc0a317384474d9b86e968c7c60bc745",
+        "name": "bmb-automations-6506",
+        "metadata": {
+          "aflCode": "54060ea73bdf4ee78d7d20bdcebf9a48",
+          "appD": 1,
+          "bio": "Starting my agency ",
+          "lastOffline": 1755481790524165600,
+          "linkFacebook": "",
+          "linkInstagram": "",
+          "linkLinkedin": "",
+          "linkTwitter": "",
+          "linkWebsite": "",
+          "linkYoutube": "",
+          "location": "",
+          "notifs": 247,
+          "pictureBubble": "https://assets.skool.com/f/fc0a317384474d9b86e968c7c60bc745/1ef40d6965c84ee98e969ff93040102296e00569d2dd40058f613804fe6720da-sm.jpg",
+          "pictureProfile": "https://assets.skool.com/f/fc0a317384474d9b86e968c7c60bc745/1ef40d6965c84ee98e969ff93040102296e00569d2dd40058f613804fe6720da-md.jpg",
+          "spData": "{\"pts\":21,\"lv\":3,\"pcl\":20,\"pnl\":65,\"role\":4}",
+          "timezone": "America/New_York",
+          "unreadChats": 0
+        },
+        "createdAt": "2025-05-11T20:17:14.768908Z",
+        "updatedAt": "2025-08-18T01:49:50.524491Z",
+        "email": "bmbaiautomation@gmail.com",
+        "firstName": "Bmb",
+        "lastName": "Automations",
+        "member": {
+          "id": "111c498a6862411e8d6d8db3afe73e0f",
+          "metadata": {
+            "chatLvlAllowed": 1,
+            "mbme": "bmbaiautomation@gmail.com",
+            "mbscpe": 1756681971,
+            "mbsltv": 9700,
+            "mmbp": "{\"currency\":\"usd\",\"amount\":9700,\"recurring_interval\":\"month\"}",
+            "msbs": "sub_1Rr5eZK2xk1aF7GmXJgSF43N",
+            "numGenericPosts": 3,
+            "onPc": 1,
+            "onVw": 1,
+            "requestedAt": 1754003575462178800
+          },
+          "createdAt": "2025-07-25T14:41:29.402241Z",
+          "updatedAt": "2025-08-18T01:49:50.526499Z",
+          "userId": "fc0a317384474d9b86e968c7c60bc745",
+          "groupId": "66584e6240cc45a28d79eb60073d11b1",
+          "role": "member",
+          "approvedAt": "2025-07-31T23:12:55.465951Z",
+          "lastOffline": "2025-08-18T01:49:50.526499Z",
+          "billingProductId": "1c9f480157df46dc9c387490cb7b7033"
+        },
+        "allGroups": [
+          {
+            "id": "4c7ceb6d8a364a6598ed4810a333a191",
+            "name": "startup-dawgs",
+            "metadata": {
+              "aflPercent": 0,
+              "color": "#DF1A1A",
+              "coverSmallUrl": "https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/b5ffee13bf4a4ca892921446e5631595f16496593af048f4a64b22f2951db6fc-md.jpg",
+              "createdBy": "5f427b40ba8e4d908d05b6a5ff555c71",
+              "description": "Learn how to have the right idea, build it, and sell it B2B.\n\nBootstrap or raise funds from investors.\n",
+              "displayName": "Startup Dawgs",
+              "faviconUrl": "https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/8104d55b242c452c882fe0354a387bc9d9c62f005b7841d0b002e18330bfa5cc",
+              "initials": "SD",
+              "logoBigUrl": "https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/b5ffee13bf4a4ca892921446e5631595f16496593af048f4a64b22f2951db6fc",
+              "logoUrl": "https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/3f73ae471af346b8b9220b6d2975d8c39d877436839c49dfbd912ca51de414df",
+              "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"017121f93f914f098d7bc8c1c8e6bc0b\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"f7be631791d14c4bb6f85c12f2479e1b\",\"original_url\":\"https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/9a3ef7a66acc4dc3a80a658b5c1c423bab897b854ef14461add96711dc8a1df7\",\"small_url\":\"https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/9a3ef7a66acc4dc3a80a658b5c1c423bab897b854ef14461add96711dc8a1df7-sm.png\",\"big_url\":\"https://assets.skool.com/f/4c7ceb6d8a364a6598ed4810a333a191/9a3ef7a66acc4dc3a80a658b5c1c423bab897b854ef14461add96711dc8a1df7\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}}]}",
+              "lpDescription": "In 90 days, you\u2019ll close your first B2B customer, build a product that actually sells, and create a clear path to either raise capital or bootstrap with confidence.\n\n\u26a0\ufe0f Always know the newest vibe coding workflows before anyone else and capitalize on them.\n\nInside the community, you'll get:\n\u2705 the best 10x vibe coding setup \\(bmad, claude flow, mcp,...\\)\n\u2705 10x playbooks for B2B sales, PMF, and strategic growth\n\u2705 AI & automation workflows \\(n8n, Smartlead, Clay, Apollo\\)\n\nBecome a:\n\ud83e\udd1d 10x Vibe Marketer\n\ud83e\udd1d 10x Vibe Coder\n\ud83e\udd1d 10x Vibe Salesperson\n\ud83e\udd1d 10x Vibe Founder\n\ud83e\udd1d 10x Vibe Project Manager",
+              "membership": 1,
+              "numCourses": 2,
+              "numModules": 20,
+              "owner": "{\"id\":\"5f427b40ba8e4d908d05b6a5ff555c71\",\"name\":\"markus-heidt-8984\",\"metadata\":{\"bio\":\"Founder \\u0026 CEO @ Crateflow | I worked as a Data Scientist in Finance, Consulting and Big Corp, until I started my startup!\",\"last_offline\":1753044098384856241,\"link_facebook\":\"\",\"link_instagram\":\"\",\"link_linkedin\":\"https://www.linkedin.com/in/markus-heidt/\",\"link_twitter\":\"\",\"link_website\":\"\",\"link_youtube\":\"https://www.youtube.com/@MarkusHeidt\",\"location\":\"Germany\",\"online\":1,\"picture_bubble\":\"https://assets.skool.com/f/5f427b40ba8e4d908d05b6a5ff555c71/53ea6cf48ba34a23b210b118a54176a453379a3e46be4398bd331a60c753999f-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/5f427b40ba8e4d908d05b6a5ff555c71/53ea6cf48ba34a23b210b118a54176a453379a3e46be4398bd331a60c753999f\"},\"created_at\":\"2025-06-06T22:20:45.46701Z\",\"updated_at\":\"2025-07-20T20:43:07.568615Z\",\"email\":\"\",\"first_name\":\"Markus\",\"last_name\":\"Heidt\"}",
+              "plan": "pro",
+              "privacy": 1,
+              "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":true},\"classroom\":{\"visible\":true},\"map\":{\"visible\":true}}",
+              "totalAdmins": 2,
+              "totalMembers": 16,
+              "totalOnlineMembers": 1,
+              "totalPosts": 15,
+              "totalRules": 3
+            },
+            "createdAt": "2025-07-20T20:51:38.273638Z",
+            "updatedAt": "2025-08-18T01:57:37.725408Z"
+          },
+          {
+            "id": "66584e6240cc45a28d79eb60073d11b1",
+            "name": "new-society",
+            "metadata": {
+              "aflPercent": 40,
+              "color": "#007ACD",
+              "coverSmallUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/50439a1566834ba0b226bad0943d0c46fae7292493bb491cb961a6565c993f1f-md.jpg",
+              "createdBy": "691adfbe67c84406817dea16db13a717",
+              "currentABp": "{\"currency\":\"usd\",\"amount\":99700}",
+              "currentMBp": "{\"currency\":\"usd\",\"amount\":9700}",
+              "description": "Build your own AI Startup. Scale to $10,000 MRR.",
+              "displayName": "New Society",
+              "faviconUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/2387eb4f63aa435cabef6256b0695d389d4d5c65b3504a20ae0d5215d9f03bf0",
+              "features": "audio-chat",
+              "initials": "AI",
+              "labels": "eecfb4638bea48699127d210204d5887,51f45898d6ec482aaf26de309aada937,b9c774a719f64460832b993414970106,e77e8e167f21433280d13ef1511611c7,32806d4b25824945b596c849edfce07b,e58535194a8943a1a7d07c253e5f8a42,bfa1d005c64243378638891a080cb3e2,158a3dcb0ff94b85a25aff25fecbf1d2,e11f093dd62142fc916018dd5d70bb3c,84a57f9cc95d4514a64b5e127b1b4db3",
+              "levels": "{\"levels\":[{\"number\":1,\"name\":\"Level 1\",\"title\":\"Novice\",\"percent_of_members\":53},{\"number\":2,\"name\":\"Level 2\",\"title\":\"Learner\",\"percent_of_members\":25},{\"number\":3,\"name\":\"Level 3\",\"title\":\"Scholar\",\"percent_of_members\":12},{\"number\":4,\"name\":\"Level 4\",\"title\":\"Fellow\",\"percent_of_members\":4},{\"number\":5,\"name\":\"Level 5\",\"title\":\"Specialist\",\"percent_of_members\":3},{\"number\":6,\"name\":\"Level 6\",\"title\":\"Expert\",\"percent_of_members\":1},{\"number\":7,\"name\":\"Level 7\",\"title\":\"Genius\",\"percent_of_members\":1},{\"number\":8,\"name\":\"Level 8\",\"title\":\"AGI\",\"percent_of_members\":1},{\"number\":9,\"name\":\"Level 9\",\"title\":\"Superintelligence\",\"percent_of_members\":0}]}",
+              "links": "{\"links\":[{\"url\":\"https://www.skool.com/new-society/classroom/69a62cb0?md=0bc224d4abef4f6c8d6dcf8e2cf31d9c\",\"label\":\"Start Here\",\"public\":false},{\"url\":\"https://www.vectal.ai/\",\"label\":\"vectal.ai \ud83d\udd25\",\"public\":true}]}",
+              "logoBigUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/50439a1566834ba0b226bad0943d0c46fae7292493bb491cb961a6565c993f1f",
+              "logoUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b7a24ef2eacc47ba8014fbc11437e7a044779dde0d0d426dace2c54651f69a41",
+              "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"f0d804fab287422695dc85ff2c70e663\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://www.youtube.com/watch?v=UDcrRdfB0x8\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/UDcrRdfB0x8/hqdefault.jpg\",\"video_length_ms\":95000}},{\"id\":\"01e7bc31916d49919d14076c1a5b443e\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"534c8d26f13e44c58c7b256b04cd81d9\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"4beabd84ba6a4231b567d00b32459ab5\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"70f877133cd4497d984605c83d26f098\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"f369d0364f98462eb81cdaab5ae35516\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"eeffb0480c804b81a913cfb4879968fd\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"749488617e754883a81f9157d937d649\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"f7870076aad943408929d5e1462ddba7\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"03e73a7dea8f49159b65e26377985537\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"430073d22e8e49c2862bd18ea95de9e7\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}}]}",
+              "lpDescription": "Make your own AI Startup from scratch.\n\n\ud83d\udd25 Join 500+ of the smartest people in AI who are not afraid to take action\n\nYou Get \\(worth $11,500+\\)\n\u2705 OpenAI Codex + Claude Code Workshops\n\u2705 How David scaled his AI Startup from $0 to $10,000/mo\n\u2705 Monthly community call with David\n\u2705 Advanced n8n Workshop\n\nAnd Bonuses \\(worth $5,000+\\)\n\u2728 Complete guide on How to Prepare for AGI\n\u2728 Copy-Paste Templates and Code\n\u2728 Free 30 minute 1-1 call for all Annual subscription members\n\n\ud83e\udd1d I will personally make sure this is the greatest investment of your life. Join now.\n\n\u2795 14 day Money-Back Guarantee",
+              "membership": 1,
+              "metaConversionsStatus": "failing",
+              "numCourses": 9,
+              "numModules": 137,
+              "onlineUsers": "96db77436bbd428aadcf345ee4cafea4,d2ad2e1438bb4b98860f8a8b63b65b8e,5643f90c6a924d5ca143556638eb06d2,d06b2b4f9bde4b0a94285218291a570c,07692354aaf441bd91504968731c2e8d,56b6f25a1da34b6fb7dc60b02b329bed,4f77f5f9b5084c418860bee206c26f93,63ff89a6fc1e4b5cb921a1897981266e",
+              "owner": "{\"id\":\"691adfbe67c84406817dea16db13a717\",\"name\":\"davidondrej\",\"metadata\":{\"bio\":\"\\\"No price is too high to pay for the privilege of owning yourself.\\\"\",\"disc_top\":\"star\",\"last_offline\":1744373592698887849,\"link_facebook\":\"\",\"link_instagram\":\"https://www.instagram.com/thedavit\",\"link_linkedin\":\"\",\"link_twitter\":\"https://twitter.com/davidondrej1\",\"link_website\":\"\",\"link_youtube\":\"https://www.youtube.com/@davidondrej\",\"location\":\"instagram.com/thedavit\",\"mrr_status\":\"crown\",\"myers_briggs\":\"\",\"picture_bubble\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5\"},\"created_at\":\"2024-01-26T20:35:35.5109Z\",\"updated_at\":\"2025-04-11T18:21:09.308723Z\",\"email\":\"\",\"first_name\":\"David\",\"last_name\":\"Ondrej\"}",
+              "pluginAutoDmEnabled": 1,
+              "pluginMetaConversionsEnabled": 1,
+              "pluginMinChatLevelEnabled": 1,
+              "pluginZapierEnabled": 1,
+              "privacy": 1,
+              "retentionVideo": "{\"video_url\":\"https://youtu.be/7snrj0uEaDw\",\"video_thumbnail\":\"https://i.ytimg.com/vi/7snrj0uEaDw/hqdefault.jpg\",\"video_length_ms\":75000}",
+              "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":true},\"classroom\":{\"visible\":true},\"map\":{\"visible\":true}}",
+              "totalAdmins": 5,
+              "totalMembers": 516,
+              "totalOnlineMembers": 8,
+              "totalPosts": 4057,
+              "totalRules": 6
+            },
+            "createdAt": "2024-01-26T20:36:00.755665Z",
+            "updatedAt": "2025-08-18T01:57:18.991346Z"
+          },
+          {
+            "id": "82468358f0ca4a5380a3b013fdd71b12",
+            "name": "ai-seo-with-julian-goldie-1553",
+            "metadata": {
+              "color": "#0693E3",
+              "coverSmallUrl": "https://assets.skool.com/f/82468358f0ca4a5380a3b013fdd71b12/dac552e1c5924f07919e15fc0e56d031b448877a7bca4357b48ce14c337cf0dd-md.jpg",
+              "createdBy": "538e9c49ace64418b1189744e0b65635",
+              "description": "Discover how to make more money with AI and save 1,000s of hours with AI Automation! NEW AI trainings released daily, for FREE!",
+              "displayName": "AI Money Lab",
+              "faviconUrl": "https://assets.skool.com/f/82468358f0ca4a5380a3b013fdd71b12/5125587e1a6f42aab9da88f370a8b47ee7195a2ec4034d5d851a3d770ef24d11",
+              "initials": "AM",
+              "labels": "3e8cbaa5e4d6488ca72c384c3a2af36d",
+              "levels": "{\"levels\":[{\"number\":1,\"name\":\"Level 1\",\"title\":\"\",\"percent_of_members\":94},{\"number\":2,\"name\":\"Level 2\",\"title\":\"\",\"percent_of_members\":1},{\"number\":3,\"name\":\"Level 3\",\"title\":\"\",\"percent_of_members\":1},{\"number\":4,\"name\":\"Level 4\",\"title\":\"\",\"percent_of_members\":1},{\"number\":5,\"name\":\"Level 5\",\"title\":\"\",\"percent_of_members\":1},{\"number\":6,\"name\":\"Level 6\",\"title\":\"\",\"percent_of_members\":1},{\"number\":7,\"name\":\"Level 7\",\"title\":\"\",\"percent_of_members\":1},{\"number\":8,\"name\":\"Level 8\",\"title\":\"\",\"percent_of_members\":0},{\"number\":9,\"name\":\"Level 9\",\"title\":\"\",\"percent_of_members\":0}]}",
+              "links": "{\"links\":[{\"url\":\"https://go.juliangoldie.com/ai-profit-boardroom\",\"label\":\"Upgrade to AI Profit Boardroom \ud83d\ude80\",\"public\":true},{\"url\":\"https://go.juliangoldie.com/strategy-session?utm=skool\",\"label\":\"FREE SEO Strategy Session!\",\"public\":true},{\"url\":\"https://go.juliangoldie.com/ai-automation-page\",\"label\":\"FREE AI Automation Session!\",\"public\":true}]}",
+              "logoBigUrl": "https://assets.skool.com/f/82468358f0ca4a5380a3b013fdd71b12/dac552e1c5924f07919e15fc0e56d031b448877a7bca4357b48ce14c337cf0dd",
+              "logoUrl": "https://assets.skool.com/f/82468358f0ca4a5380a3b013fdd71b12/36801370b82e492b92a98b99ae96d887ef00a1eaf44a4032b44ae77ac019e283",
+              "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"6c92438a15d646278bbe5c7cf2f01051\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://vimeo.com/1101230093\",\"original_thumbnail_url\":\"https://i.vimeocdn.com/video/2038930281-630dbfdc9478d32d07901a97cd94ac09502734e9923007c570a3aa81f66ed109-d_1280?region=us\",\"video_length_ms\":148000}},{\"id\":\"7d75690e483a499fb80d10099c4db2c8\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/65GvYDdzJWU\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/65GvYDdzJWU/hqdefault.jpg\",\"video_length_ms\":61000}},{\"id\":\"8ce05006b3414ecd84148df15b101f81\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/R_1EyMx1bpA\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/R_1EyMx1bpA/hqdefault.jpg\",\"video_length_ms\":20000}},{\"id\":\"16d31cf3cf914b748fd79e4feb9ed97f\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/ROqim0nWUNs\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/ROqim0nWUNs/hqdefault.jpg\",\"video_length_ms\":81000}},{\"id\":\"f718fe5162d74da99095d6eebf39e7dc\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/7Eh3sj6mAuM\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/7Eh3sj6mAuM/hqdefault.jpg\",\"video_length_ms\":160000}},{\"id\":\"189a59d5457e45329812be7788a0a609\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/C3whySAI6SU\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/C3whySAI6SU/hqdefault.jpg\",\"video_length_ms\":76000}}]}",
+              "lpDescription": "\ud83d\ude80 Want to make more money with AI?\n\nWelcome to the FREE AI Success Lab with Julian Goldie!\n\n\ud83d\udcc8 Inside you'll get 50+ FREE AI TOOLS AND 200+ ChatGPT SEO Prompts \ud83e\udd2f\n\n\ud83e\udd2f You'll learn:\n- How to Make Money With AI Agents\n- 1,000+ FREE N8N Workflows\n- 200+ ChatGPT Prompts!\n- How 1 Member Made $10,000+ with ChatGPT\n- A full blueprint to generate 1,000s leads FREE with AI\n\n\ud83d\udd25 What you'll also get:\n- Free AI Community\n- Free AI Course\n- PROVEN AI case studies\n\nHit the join button and speak soon!\n----------------------------------------------------------------------------------------------------------------------------\n\nP.S. Want to upgrade?\n\n\ud83d\ude80 Want Weekly Q&As + Coaching + Community + Help Implementing This?\n\ud83d\udcb0 Get the AI Playbook that Makes $300K/Month \u2013[ Join the AI Profit Boardroom Here](https://www.skool.com/ai-profit-lab-7462/about)",
+              "membership": 0,
+              "noCategories": 1,
+              "numCourses": 13,
+              "numModules": 294,
+              "onlineUsers": "1aa36b5ce41947ecb4baf96d3c30d9f4,8c735a16ad2541c2999c04cc6289584b,ad4873b239254ec48ef76c124dc5c63d,1cad2c7a72614bba8b4cb775e67bacfe,b8e4a996386544309692cb82f2f3e5aa,83c21c55b45d43e89e381525c9de0c7a,4615b885121d49b1b348a8c4641f8f69,a491c89e889b4453a2ed197c962ef415,837a1c15479445dd832f2a82156ff406,30c5ddb872414a1191e5919f35f6040c",
+              "owner": "{\"id\":\"538e9c49ace64418b1189744e0b65635\",\"name\":\"julian-goldie-4308\",\"metadata\":{\"bio\":\"SEO Link builder and CEO of an SEO link building agency.\",\"last_offline\":1753658770407127083,\"link_facebook\":\"https://www.facebook.com/groups/2536330149997077\",\"link_instagram\":\"https://www.instagram.com/juliangoldieai\",\"link_linkedin\":\"https://www.linkedin.com/in/juliangoldieseo\",\"link_twitter\":\"https://twitter.com/JulianGoldieSEO\",\"link_website\":\"https://go.juliangoldie.com/strategy-session\",\"link_youtube\":\"https://www.youtube.com/@JulianGoldieSEO/videos\",\"location\":\"London\",\"mrr_status\":\"crown\",\"myers_briggs\":\"\",\"picture_bubble\":\"https://assets.skool.com/f/538e9c49ace64418b1189744e0b65635/d9edfdc8dc0d440386575c8a6faf03ffd92f2508d86346d6adc1adca906ae0b2\",\"picture_profile\":\"https://assets.skool.com/f/538e9c49ace64418b1189744e0b65635/d9edfdc8dc0d440386575c8a6faf03ffd92f2508d86346d6adc1adca906ae0b2\"},\"created_at\":\"2022-06-27T05:48:02.495977Z\",\"updated_at\":\"2025-07-28T00:00:09.343702Z\",\"email\":\"\",\"first_name\":\"Julian\",\"last_name\":\"Goldie\"}",
+              "pluginAutoDmEnabled": 1,
+              "pluginMinChatLevelEnabled": 1,
+              "pluginZapierEnabled": 1,
+              "privacy": 1,
+              "srcGroup": "b8267b86f18f40a7a0083d54e7c25ec9",
+              "survey": "{\"updated_at\":\"2025-05-29T22:37:47.560513489Z\",\"survey\":[{\"question\":\"What's your email so I can send $1,000s in FREE AI Training?\",\"type\":\"email\"},{\"question\":\"Want a FREE AI Automation training call? Put your number, + country code (like +1 40630545498), to get that FREE Training!\",\"type\":\"text\"}]}",
+              "surveyEnabled": 1,
+              "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":true},\"classroom\":{\"visible\":true},\"map\":{\"visible\":false}}",
+              "totalAdmins": 5,
+              "totalMembers": 20739,
+              "totalOnlineMembers": 81,
+              "totalPosts": 2421,
+              "totalRules": 3
+            },
+            "createdAt": "2024-09-19T13:23:42.457166Z",
+            "updatedAt": "2025-08-18T01:57:28.147936Z"
+          },
+          {
+            "id": "a04be9c135e4488da494127cda2827ce",
+            "name": "ai-agents-mastery",
+            "metadata": {
+              "aflPercent": 40,
+              "color": "#BB6EE7",
+              "coverSmallUrl": "https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/9688525755764979979b574e651e3033b9f152de375b4643958c3b884cc052ba-md.jpg",
+              "createdBy": "9729d087b8174672afee066f0d9b64e7",
+              "description": "\ud83e\udd16 Learn how to automate content & business tasks with AI agents.",
+              "displayName": "AI Agent Mastery",
+              "faviconUrl": "https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/5c4d45bf10374484bc568bb7afdf5b0f0ec5b8df0d254d479dd831e29b6c37c9",
+              "initials": "AA",
+              "labels": "6fa58805c66747a1928821123ea2f451,4dd800bfaf71470ab4d87145b73ab3e9,b95e7ff795054120a5253571c62d2766",
+              "levels": "{\"levels\":[{\"number\":1,\"name\":\"Level 1\",\"title\":\"\",\"percent_of_members\":97},{\"number\":2,\"name\":\"Level 2\",\"title\":\"\",\"percent_of_members\":1},{\"number\":3,\"name\":\"Level 3\",\"title\":\"\",\"percent_of_members\":1},{\"number\":4,\"name\":\"Level 4\",\"title\":\"\",\"percent_of_members\":0},{\"number\":5,\"name\":\"Level 5\",\"title\":\"\",\"percent_of_members\":0},{\"number\":6,\"name\":\"Level 6\",\"title\":\"\",\"percent_of_members\":1},{\"number\":7,\"name\":\"Level 7\",\"title\":\"\",\"percent_of_members\":0},{\"number\":8,\"name\":\"Level 8\",\"title\":\"\",\"percent_of_members\":0},{\"number\":9,\"name\":\"Level 9\",\"title\":\"\",\"percent_of_members\":0}]}",
+              "links": "{\"links\":[{\"url\":\"https://n8n.partnerlinks.io/1ov369c05hs3\",\"label\":\"Free n8n Account\",\"public\":true}]}",
+              "logoBigUrl": "https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/9688525755764979979b574e651e3033b9f152de375b4643958c3b884cc052ba",
+              "logoUrl": "https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/bf2fd4974e6a4b228bf663e48221308c62c0e9dcd8a5422e9593c28dbf7e2be4",
+              "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"e9f68525eb144e13a58b30ccc579acde\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"653609449f13456c87b743cd7f6533c4\",\"original_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/0048ce82b046451fb6dbc84c0cb92a66c182d42d169841f2b26276c8953719c5\",\"small_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/0048ce82b046451fb6dbc84c0cb92a66c182d42d169841f2b26276c8953719c5-sm.png\",\"big_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/0048ce82b046451fb6dbc84c0cb92a66c182d42d169841f2b26276c8953719c5\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"724d59d689894bc89a72656e3c386417\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"3fadc8ab139c40ad911844655bc4e174\",\"original_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/c2fd7f06f2ec4abb8eabc4565e74a685920200d42f4c495e84831a5fa1602fdf\",\"small_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/c2fd7f06f2ec4abb8eabc4565e74a685920200d42f4c495e84831a5fa1602fdf-sm.png\",\"big_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/c2fd7f06f2ec4abb8eabc4565e74a685920200d42f4c495e84831a5fa1602fdf\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"fd57cf8ed0ef4d5ca21e0a78852b99fb\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"eaac733fac634bfbb3e22e214aa82697\",\"original_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/690d68fc513f48dcb3cc1d0bd9cc922d028302bca6f642bf93225d4a5d41dc9f\",\"small_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/690d68fc513f48dcb3cc1d0bd9cc922d028302bca6f642bf93225d4a5d41dc9f-sm.png\",\"big_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/690d68fc513f48dcb3cc1d0bd9cc922d028302bca6f642bf93225d4a5d41dc9f-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"6b28b6fb1e414546b9a9b15f4940d89f\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"af5f4711e2374058b8e83b281cb30afd\",\"original_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/d4fdaba4a5e54bc49b2fa7bf69e3542842902383e1cc483a8648b5f45db57451\",\"small_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/d4fdaba4a5e54bc49b2fa7bf69e3542842902383e1cc483a8648b5f45db57451-sm.png\",\"big_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/d4fdaba4a5e54bc49b2fa7bf69e3542842902383e1cc483a8648b5f45db57451-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"9d1e0485f3bb4d618ce27479d82ecefa\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"2582f79e8a384adab6b8b094969d526c\",\"original_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/4deadd30cf1a4ebaae89c6f84726458ac826ae15db2c47d9a7ea5d0f36b1e6f2\",\"small_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/4deadd30cf1a4ebaae89c6f84726458ac826ae15db2c47d9a7ea5d0f36b1e6f2-sm.jpg\",\"big_url\":\"https://assets.skool.com/f/a04be9c135e4488da494127cda2827ce/4deadd30cf1a4ebaae89c6f84726458ac826ae15db2c47d9a7ea5d0f36b1e6f2\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}}]}",
+              "lpDescription": "\u26a0\ufe0f Act Fast: Price is Going from $27 \u2192 $67 After the Next 100 Members\n\n\ud83d\udc4b Yo, it\u2019s Graham \u2014 and you\u2019re early\u2026 which means you\u2019re winning already.\n\nThat AI system went on to generate 50,000+ followers in 45 days, and now I\u2019m handing you the exact setup.\nInside, you\u2019ll get:\n\n\u2699\ufe0f Step-by-step AI Agent Workflows \u2013 no guesswork, just plug & go\n\u2699\ufe0f Copy/Paste Automation Templates \u2013 post content, grow, and monetize hands-free\n\u2699\ufe0f A Builder\u2019s-Only Community \u2013 no fluff, just operators who actually get it\n\nThis Skool is built for:\n\ud83d\udd39 Creators who want to automate content\n\ud83d\udd39 Agency owners who want to scale with AI agents\n\ud83d\udd39 Builders ready to turn attention into cash using AI + automation\n\nThis is your early access window. Once 100 more people join, the price locks in at $67 and never goes back down.\n\nIf you're serious about growing an audience, automating your grind, and making money while your AI agents do the work\u2026\n\nThis is your spot.\n\nLet\u2019s build your automated content machine.See you inside.\n\n\u2013 Graham",
+              "membership": 0,
+              "numCourses": 6,
+              "numModules": 8,
+              "onlineUsers": "64b82112630d4e62ae507c0ecb3150e1,2182f4654c0a47759f25a8ad6186ae1f,261159df51a842b3adb8ec4abb5b1b79,8e153963a5754036a00a254b312f67b1,a337cfe4fe704a8b9416e9cb797a2e86,91c720df47bb43329fc44a249ef8f898,dd9d987246c84da588bdb2fbcf56464c,aec762789c584ba68a9eead166caf51c,939c855733cd45ed9ea40b2f58c4a40b,08afc01b010b46669f6ffc40cf7aae4d",
+              "owner": "{\"id\":\"9729d087b8174672afee066f0d9b64e7\",\"name\":\"graham-radina-5275\",\"metadata\":{\"bio\":\"Ai dev\",\"last_offline\":1745371588761907672,\"online\":1,\"picture_bubble\":\"https://assets.skool.com/f/9729d087b8174672afee066f0d9b64e7/3482ec706b704663b9c3e7c74eac0bbdc3aaf28a8da4477c8eb21d50147346ce-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/9729d087b8174672afee066f0d9b64e7/3482ec706b704663b9c3e7c74eac0bbdc3aaf28a8da4477c8eb21d50147346ce-md.jpg\"},\"created_at\":\"2025-04-21T23:46:59.38601Z\",\"updated_at\":\"2025-04-23T01:30:28.796338Z\",\"email\":\"\",\"first_name\":\"Graham\",\"last_name\":\"Radina\"}",
+              "pluginAutoDmEnabled": 1,
+              "privacy": 0,
+              "srcGroup": "72de1ab0f0734bfab9d4d266adf08025",
+              "survey": "{\"updated_at\":\"2025-04-26T00:02:10.104434022Z\",\"survey\":[{\"question\":\"What brings you here? Pick the one that fits best \ud83d\udc47\",\"type\":\"options\",\"options\":[\"\ud83c\udfe2 I'm a business owner looking to automate\",\"\ud83c\udfa5 I'm a content creator building with AI\",\"\ud83d\udcb8 I want to make money using AI agents\",\"\ud83e\udde0 I'm just curious and here to learn\"]},{\"question\":\"Best email to send access\ud83d\udc47\",\"type\":\"email\"}]}",
+              "surveyEnabled": 1,
+              "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":false},\"classroom\":{\"visible\":true},\"map\":{\"visible\":false}}",
+              "totalAdmins": 1,
+              "totalMembers": 8416,
+              "totalOnlineMembers": 18,
+              "totalPosts": 473,
+              "totalRules": 3
+            },
+            "createdAt": "2025-04-23T01:30:33.344356Z",
+            "updatedAt": "2025-08-18T01:57:33.888784Z",
+            "public": true
+          },
+          {
+            "id": "b51c57150c70495899bf4bc8aaee8166",
+            "name": "ai-automation-society",
+            "metadata": {
+              "color": "#0693E3",
+              "coverSmallUrl": "https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/2852780bf96e45b69cf6f7b1fdbdff0845ce246b50924fcab87d1bd993fc2cb4-md.jpg",
+              "createdBy": "fcb8f1ac74644b298f8268197d647ad4",
+              "description": "A community for mastering AI-driven automation and AI agents. Learn, collaborate, and optimize your workflows!",
+              "displayName": "AI Automation Society",
+              "faviconUrl": "https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/1acb114cbc0f423ba04938553bdf81908b28ea24929443e6a62db797dd90f6c0",
+              "googleTagId": "AW-17010633934/s97CCMungboaEM7Zpq8_",
+              "initials": "AA",
+              "labels": "0464a29d2fe74f38ab0aeca1d04a1e86,e2d58b6295b940cebad1e96bb936efb1,27b1f4d1e501423bbddd4d04325e40a0,6bec16d7f8b84cd1aa84d30eddd2af8d,fe7a8b086f9e4103b8e62138e7444bb6,c491f892c2aa48798959c3e01174e14f,a75a4867e1524484982b36b31e15dba9",
+              "levels": "{\"levels\":[{\"number\":1,\"name\":\"Level 1\",\"title\":\"AI Explorer \ud83d\udee0\ufe0f\",\"percent_of_members\":92},{\"number\":2,\"name\":\"Level 2\",\"title\":\"Automation Novice \ud83d\udee0\ufe0f\",\"percent_of_members\":2},{\"number\":3,\"name\":\"Level 3\",\"title\":\"AI Operator \ud83d\udee0\ufe0f\",\"percent_of_members\":1},{\"number\":4,\"name\":\"Level 4\",\"title\":\"Agent Builder \ud83e\udd16\",\"percent_of_members\":1},{\"number\":5,\"name\":\"Level 5\",\"title\":\"Agent Orchestrator\ud83e\udd16\",\"percent_of_members\":1},{\"number\":6,\"name\":\"Level 6\",\"title\":\"AI Engineer\ud83e\udd16\",\"percent_of_members\":1},{\"number\":7,\"name\":\"Level 7\",\"title\":\"AI Visionary\ud83d\udc8e\",\"percent_of_members\":1},{\"number\":8,\"name\":\"Level 8\",\"title\":\"AI Mastermind\u2728\",\"percent_of_members\":1},{\"number\":9,\"name\":\"Level 9\",\"title\":\"AI Grandmaster\ud83d\ude80\",\"percent_of_members\":0}]}",
+              "links": "{\"links\":[{\"url\":\"https://www.skool.com/ai-automation-society/classroom/3d31807e?md=87dcf10a8b2e4e17be8aee82c2c2f11e\",\"label\":\"Start Here\ud83d\udccd\",\"public\":false},{\"url\":\"https://www.skool.com/ai-automation-society/classroom/4e44a169?md=845ef1db60c84dfabfec759c2378a21a\",\"label\":\"Discount Codes \ud83d\udcb8\",\"public\":false},{\"url\":\"https://www.skool.com/ai-automation-society-plus/about\",\"label\":\"Upgrade to AIS+ \ud83d\ude80\",\"public\":true}]}",
+              "logoBigUrl": "https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/2852780bf96e45b69cf6f7b1fdbdff0845ce246b50924fcab87d1bd993fc2cb4",
+              "logoUrl": "https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/071e29ca1eec4c4c851bf1e4f705e1d13fd7d1ff1ce9450da0a8e5d902736755",
+              "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"14853a2cc7894e2380a00474ae182b2e\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://www.loom.com/share/11479f0c65594512af79a04f5f45672f?sid=fb1ff499-d89a-46f0-81fd-8ef24a784950\",\"original_thumbnail_url\":\"https://cdn.loom.com/sessions/thumbnails/11479f0c65594512af79a04f5f45672f-ce1fa7ea326a87be.gif\",\"video_length_ms\":58087}},{\"id\":\"1d8a9c88790441a2a06a52bce2055ad4\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://youtu.be/TvteZwqr8tc\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/TvteZwqr8tc/hqdefault.jpg\",\"video_length_ms\":78000}},{\"id\":\"81d7314797034d199b5c44fcb533ced6\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"d5b756c99d0d4e69a3562dabe36d9218\",\"original_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/4c579942e2f34bb2944ad8446825ec9b3650aa4b8b9f4a19b01cc1caa57e84fa\",\"small_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/4c579942e2f34bb2944ad8446825ec9b3650aa4b8b9f4a19b01cc1caa57e84fa-sm.png\",\"big_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/4c579942e2f34bb2944ad8446825ec9b3650aa4b8b9f4a19b01cc1caa57e84fa-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"d7cc5ba9d39f4dbb9688ad217c7c5889\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"2919268519f842b398ddf6bd646d7083\",\"original_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/3b0efcf8e91741388ba599f50a58832f97cafb6e70a64852ad2c119273cb7ff1\",\"small_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/3b0efcf8e91741388ba599f50a58832f97cafb6e70a64852ad2c119273cb7ff1-sm.jpg\",\"big_url\":\"https://assets.skool.com/f/b51c57150c70495899bf4bc8aaee8166/3b0efcf8e91741388ba599f50a58832f97cafb6e70a64852ad2c119273cb7ff1\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}}]}",
+              "lpDescription": "FREE DOWNLOADS: all of the n8n templates from my YouTube channel!\n\n[ul][li]An entire marketing team of agents that can write Linkedin posts, generate videos, and publish blog posts[li]A personal assistant agent that can send emails, reply to emails you receive, manage your calendar, and more[li]A faceless shorts generator, allowing you to produce a constant stream of video content without touching it yourself[li]Much, much more\n\nJust import the template and go!\n\nWe now have over 100,000 members. It's insane how fast this community has grown.\n\nJoin us to share knowledge, collaborate on projects, and master the future of automation together!\n\nCommunity run by verified n8n Expert Partner Nate Herk \u2705\n\n\ud83d\udc49 For a deeper learning experience, check out [AI Automation Society Plus](https://www.skool.com/ai-automation-society-plus/about).",
+              "membership": 1,
+              "metaConversionsStatus": "success",
+              "minPostLevel": 2,
+              "numCourses": 6,
+              "numModules": 72,
+              "onboardingVideo": "{\"video_url\":\"https://www.loom.com/share/1e355aad92b4463b874a4fe46be8782b?sid=1c7f922c-611a-4537-956e-6b084b8b7f24\",\"video_thumbnail\":\"https://cdn.loom.com/sessions/thumbnails/1e355aad92b4463b874a4fe46be8782b-f5fef4b997e03286.gif\",\"video_length_ms\":50407}",
+              "onlineUsers": "a899ed9bb68747d09133569f6dcae3cd,471707244db54c4a9a6400d9948dbbab,d6422d2e1dad433499f3cbcd36f6a0f7,c0df152efd144698a954c6ce92bd0281,5a012c888e274e65b84265f104d7f834,f3b2016df7d3473798d32a04aad5d0ad,4c0b0d015a9941ee89482d0c4f66bc12,8c735a16ad2541c2999c04cc6289584b,902ed9d7ad504de8857f841f1221899f,57e5cead94504dd98cae7994656c1a5b",
+              "owner": "{\"id\":\"fcb8f1ac74644b298f8268197d647ad4\",\"name\":\"nate-herk-9178\",\"metadata\":{\"bio\":\"Co-Founder @ TrueHorizon AI. Sharing my knowledge of AI Automations through YouTube.\",\"disc_top\":\"star\",\"last_offline\":1749664628879391038,\"link_facebook\":\"\",\"link_instagram\":\"https://www.instagram.com/nateherk/\",\"link_linkedin\":\"https://www.linkedin.com/in/nateherkelman/\",\"link_twitter\":\"\",\"link_website\":\"\",\"link_youtube\":\"\",\"location\":\"\",\"mrr_status\":\"diamond\",\"myers_briggs\":\"\",\"picture_bubble\":\"https://assets.skool.com/f/fcb8f1ac74644b298f8268197d647ad4/bbf3a9350d3a4a94bb7ba8d98148fb4cc7769209439d4245948953035effda04-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/fcb8f1ac74644b298f8268197d647ad4/bbf3a9350d3a4a94bb7ba8d98148fb4cc7769209439d4245948953035effda04\"},\"created_at\":\"2024-08-22T15:27:52.39198Z\",\"updated_at\":\"2025-06-11T17:58:26.150858Z\",\"email\":\"\",\"first_name\":\"Nate\",\"last_name\":\"Herk\"}",
+              "pluginAutoDmEnabled": 1,
+              "pluginGoogleAdsEnabled": 1,
+              "pluginMetaConversionsEnabled": 1,
+              "pluginMinChatLevelEnabled": 1,
+              "pluginZapierEnabled": 1,
+              "privacy": 0,
+              "srcGroup": "e44528d24bfe4d65b0a412441feaa489",
+              "survey": "{\"updated_at\":\"2025-03-13T19:45:09.887137963Z\",\"survey\":[{\"question\":\"What is your email address?\",\"type\":\"email\"}]}",
+              "surveyEnabled": 1,
+              "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":false},\"classroom\":{\"visible\":true},\"map\":{\"visible\":true}}",
+              "totalAdmins": 10,
+              "totalMembers": 116124,
+              "totalOnlineMembers": 338,
+              "totalPosts": 5641,
+              "totalRules": 5
+            },
+            "createdAt": "2024-10-15T02:49:53.91923Z",
+            "updatedAt": "2025-08-18T01:58:00.240145Z",
+            "public": true
+          }
+        ],
+        "allTags": null,
+        "hasMore": null,
+        "pinnedGroups": [],
+        "switcherHiddenGroups": []
+      },
+      "currentGroup": {
+        "id": "66584e6240cc45a28d79eb60073d11b1",
+        "name": "new-society",
+        "metadata": {
+          "aflPercent": 40,
+          "color": "#007ACD",
+          "coverSmallUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/50439a1566834ba0b226bad0943d0c46fae7292493bb491cb961a6565c993f1f-md.jpg",
+          "createdBy": "691adfbe67c84406817dea16db13a717",
+          "currentABp": "{\"currency\":\"usd\",\"amount\":99700}",
+          "currentMBp": "{\"currency\":\"usd\",\"amount\":9700}",
+          "description": "Build your own AI Startup. Scale to $10,000 MRR.",
+          "displayName": "New Society",
+          "faviconUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/2387eb4f63aa435cabef6256b0695d389d4d5c65b3504a20ae0d5215d9f03bf0",
+          "features": "audio-chat",
+          "initials": "AI",
+          "labels": "eecfb4638bea48699127d210204d5887,51f45898d6ec482aaf26de309aada937,b9c774a719f64460832b993414970106,e77e8e167f21433280d13ef1511611c7,32806d4b25824945b596c849edfce07b,e58535194a8943a1a7d07c253e5f8a42,bfa1d005c64243378638891a080cb3e2,158a3dcb0ff94b85a25aff25fecbf1d2,e11f093dd62142fc916018dd5d70bb3c,84a57f9cc95d4514a64b5e127b1b4db3",
+          "levels": "{\"levels\":[{\"number\":1,\"name\":\"Level 1\",\"title\":\"Novice\",\"percent_of_members\":53},{\"number\":2,\"name\":\"Level 2\",\"title\":\"Learner\",\"percent_of_members\":25},{\"number\":3,\"name\":\"Level 3\",\"title\":\"Scholar\",\"percent_of_members\":12},{\"number\":4,\"name\":\"Level 4\",\"title\":\"Fellow\",\"percent_of_members\":4},{\"number\":5,\"name\":\"Level 5\",\"title\":\"Specialist\",\"percent_of_members\":3},{\"number\":6,\"name\":\"Level 6\",\"title\":\"Expert\",\"percent_of_members\":1},{\"number\":7,\"name\":\"Level 7\",\"title\":\"Genius\",\"percent_of_members\":1},{\"number\":8,\"name\":\"Level 8\",\"title\":\"AGI\",\"percent_of_members\":1},{\"number\":9,\"name\":\"Level 9\",\"title\":\"Superintelligence\",\"percent_of_members\":0}]}",
+          "links": "{\"links\":[{\"url\":\"https://www.skool.com/new-society/classroom/69a62cb0?md=0bc224d4abef4f6c8d6dcf8e2cf31d9c\",\"label\":\"Start Here\",\"public\":false},{\"url\":\"https://www.vectal.ai/\",\"label\":\"vectal.ai \ud83d\udd25\",\"public\":true}]}",
+          "logoBigUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/50439a1566834ba0b226bad0943d0c46fae7292493bb491cb961a6565c993f1f",
+          "logoUrl": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b7a24ef2eacc47ba8014fbc11437e7a044779dde0d0d426dace2c54651f69a41",
+          "lpAttachmentsData": "{\"attachments_data\":[{\"id\":\"f0d804fab287422695dc85ff2c70e663\",\"landing_page_attachment_type\":2,\"image\":{\"file_id\":\"\",\"original_url\":\"\"},\"video\":{\"video_url\":\"https://www.youtube.com/watch?v=UDcrRdfB0x8\",\"original_thumbnail_url\":\"https://i.ytimg.com/vi/UDcrRdfB0x8/hqdefault.jpg\",\"video_length_ms\":95000}},{\"id\":\"01e7bc31916d49919d14076c1a5b443e\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"534c8d26f13e44c58c7b256b04cd81d9\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/a518ecb34673467fb12e6b0bf5a21e5f914be762874b41b5ae1d00d05f939fea-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"4beabd84ba6a4231b567d00b32459ab5\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"70f877133cd4497d984605c83d26f098\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/c52e17d67f4b4d1f81f9ec99db60a5e9ff9fdd32de9b4faa8151b50b3477c7f1-md.png\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"f369d0364f98462eb81cdaab5ae35516\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"eeffb0480c804b81a913cfb4879968fd\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/9992ae9b939349c2bbc9c34f168ad053e4e6baebceb8495a98a6b2569b14a73e\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"749488617e754883a81f9157d937d649\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"f7870076aad943408929d5e1462ddba7\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/e7b32254eafa46d68e0cd6c47569b3a989dae0423bf84a91b06d44bc3b0df3e7\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}},{\"id\":\"03e73a7dea8f49159b65e26377985537\",\"landing_page_attachment_type\":1,\"image\":{\"file_id\":\"430073d22e8e49c2862bd18ea95de9e7\",\"original_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540\",\"small_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540-sm.png\",\"big_url\":\"https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/36b793510eaa42c68dbd6c7dd359f7a5207e9973cdcc4391a33387a88ba1e540\"},\"video\":{\"video_url\":\"\",\"original_thumbnail_url\":\"\"}}]}",
+          "lpDescription": "Make your own AI Startup from scratch.\n\n\ud83d\udd25 Join 500+ of the smartest people in AI who are not afraid to take action\n\nYou Get \\(worth $11,500+\\)\n\u2705 OpenAI Codex + Claude Code Workshops\n\u2705 How David scaled his AI Startup from $0 to $10,000/mo\n\u2705 Monthly community call with David\n\u2705 Advanced n8n Workshop\n\nAnd Bonuses \\(worth $5,000+\\)\n\u2728 Complete guide on How to Prepare for AGI\n\u2728 Copy-Paste Templates and Code\n\u2728 Free 30 minute 1-1 call for all Annual subscription members\n\n\ud83e\udd1d I will personally make sure this is the greatest investment of your life. Join now.\n\n\u2795 14 day Money-Back Guarantee",
+          "membership": 1,
+          "metaConversionsStatus": "failing",
+          "numCourses": 9,
+          "numModules": 137,
+          "onlineUsers": "96db77436bbd428aadcf345ee4cafea4,d2ad2e1438bb4b98860f8a8b63b65b8e,5643f90c6a924d5ca143556638eb06d2,d06b2b4f9bde4b0a94285218291a570c,07692354aaf441bd91504968731c2e8d,56b6f25a1da34b6fb7dc60b02b329bed,4f77f5f9b5084c418860bee206c26f93,63ff89a6fc1e4b5cb921a1897981266e",
+          "owner": "{\"id\":\"691adfbe67c84406817dea16db13a717\",\"name\":\"davidondrej\",\"metadata\":{\"bio\":\"\\\"No price is too high to pay for the privilege of owning yourself.\\\"\",\"disc_top\":\"star\",\"last_offline\":1744373592698887849,\"link_facebook\":\"\",\"link_instagram\":\"https://www.instagram.com/thedavit\",\"link_linkedin\":\"\",\"link_twitter\":\"https://twitter.com/davidondrej1\",\"link_website\":\"\",\"link_youtube\":\"https://www.youtube.com/@davidondrej\",\"location\":\"instagram.com/thedavit\",\"mrr_status\":\"crown\",\"myers_briggs\":\"\",\"picture_bubble\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5\"},\"created_at\":\"2024-01-26T20:35:35.5109Z\",\"updated_at\":\"2025-04-11T18:21:09.308723Z\",\"email\":\"\",\"first_name\":\"David\",\"last_name\":\"Ondrej\"}",
+          "pluginAutoDmEnabled": 1,
+          "pluginMetaConversionsEnabled": 1,
+          "pluginMinChatLevelEnabled": 1,
+          "pluginZapierEnabled": 1,
+          "privacy": 1,
+          "retentionVideo": "{\"video_url\":\"https://youtu.be/7snrj0uEaDw\",\"video_thumbnail\":\"https://i.ytimg.com/vi/7snrj0uEaDw/hqdefault.jpg\",\"video_length_ms\":75000}",
+          "selfChat": "on",
+          "tabs": "{\"audio-chat\":{\"visible\":false},\"calendar\":{\"visible\":true},\"classroom\":{\"visible\":true},\"map\":{\"visible\":true}}",
+          "totalAdmins": 5,
+          "totalMembers": 516,
+          "totalOnlineMembers": 8,
+          "totalPosts": 4057,
+          "totalRules": 6
+        },
+        "createdAt": "2024-01-26T20:36:00.755665Z",
+        "updatedAt": "2025-08-18T01:57:18.991346Z",
+        "labels": [
+          {
+            "id": "eecfb4638bea48699127d210204d5887",
+            "metadata": {
+              "color": "#3D2B83",
+              "description": "Share your AI-related Wins and Accomplishments",
+              "displayName": "\ud83c\udfc6 Wins",
+              "postWriteRole": 4,
+              "posts": 205
+            },
+            "createdAt": "2024-07-18T17:24:38.450663Z",
+            "updatedAt": "2025-08-13T08:30:32.129925Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "51f45898d6ec482aaf26de309aada937",
+            "metadata": {
+              "color": "#3EDE31",
+              "description": "If you need help with anything, choose this category.",
+              "displayName": "\ud83c\udd98 Need Help",
+              "postWriteRole": 4,
+              "posts": 216
+            },
+            "createdAt": "2024-10-12T07:57:57.362475Z",
+            "updatedAt": "2025-08-17T00:52:54.73351Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "b9c774a719f64460832b993414970106",
+            "metadata": {
+              "color": "#545B4A",
+              "description": "Anything and everything about David's startup - vectal.ai",
+              "displayName": "\u26a1 Vectal",
+              "postWriteRole": 4,
+              "posts": 123
+            },
+            "createdAt": "2024-01-29T13:46:17.825299Z",
+            "updatedAt": "2025-08-13T17:58:19.974527Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "e77e8e167f21433280d13ef1511611c7",
+            "metadata": {
+              "color": "#472B95",
+              "defaultSort": "newest-cm",
+              "description": "Share interesting and practical use-cases for your AI tools or agents.",
+              "displayName": "\ud83d\udc4b Introduction",
+              "postWriteRole": 4,
+              "posts": 169
+            },
+            "createdAt": "2024-05-29T18:56:42.39105Z",
+            "updatedAt": "2025-08-17T14:26:12.164254Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "32806d4b25824945b596c849edfce07b",
+            "metadata": {
+              "color": "#F9C6F7",
+              "description": "Looking to hire people? Or do you want to get hired? Post into this category.",
+              "displayName": "\ud83d\udce2 Hiring",
+              "postWriteRole": 4,
+              "posts": 49
+            },
+            "createdAt": "2024-07-18T16:29:29.017742Z",
+            "updatedAt": "2025-08-05T15:56:57.441525Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "e58535194a8943a1a7d07c253e5f8a42",
+            "metadata": {
+              "color": "#A8BBC4",
+              "description": "Share your favorite AI Tools \ud83d\udc4c",
+              "displayName": "\ud83e\udd16 AI Tools ",
+              "postWriteRole": 4,
+              "posts": 621
+            },
+            "createdAt": "2024-01-29T13:54:02.807518Z",
+            "updatedAt": "2025-08-17T14:52:22.926919Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "bfa1d005c64243378638891a080cb3e2",
+            "metadata": {
+              "color": "#C68C52",
+              "description": "Do you have a question regarding anything? Post it here.",
+              "displayName": "\u2753Questions",
+              "postWriteRole": 4,
+              "posts": 556
+            },
+            "createdAt": "2024-05-29T19:00:35.164355Z",
+            "updatedAt": "2025-08-15T16:57:26.678323Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "158a3dcb0ff94b85a25aff25fecbf1d2",
+            "metadata": {
+              "color": "#009E5D",
+              "description": "Share and discuss what's happening in AI right now.",
+              "displayName": "\ud83c\udd95 News",
+              "postWriteRole": 4,
+              "posts": 802
+            },
+            "createdAt": "2024-01-26T20:36:00.759683Z",
+            "updatedAt": "2025-08-14T21:04:33.617621Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "e11f093dd62142fc916018dd5d70bb3c",
+            "metadata": {
+              "color": "#7E0B45",
+              "defaultSort": "newest-cm",
+              "description": "A place to discuss and develop ideas about AI and Tech beyond the news cycle.",
+              "displayName": "\ud83e\udd2f Ideas / \ud83e\uddbe Use-Cases",
+              "postWriteRole": 4,
+              "posts": 474
+            },
+            "createdAt": "2024-03-14T15:37:12.020188Z",
+            "updatedAt": "2025-08-03T19:27:54.055162Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          },
+          {
+            "id": "84a57f9cc95d4514a64b5e127b1b4db3",
+            "metadata": {
+              "color": "#ADB4FE",
+              "description": "Not sure where your AI topic fits? This is your spot.",
+              "displayName": "\ud83e\udd37\u200d\u2642\ufe0f Other",
+              "postWriteRole": 4,
+              "posts": 842
+            },
+            "createdAt": "2024-02-03T07:40:45.749563Z",
+            "updatedAt": "2025-08-11T15:43:17.204859Z",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1"
+          }
+        ],
+        "onlineUsers": [
+          {
+            "id": "96db77436bbd428aadcf345ee4cafea4",
+            "name": "kenneth-crossland-3773",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/96db77436bbd428aadcf345ee4cafea4/99fdc5f8a8514a1bb0b2ec186e07bf5cd2e63dc4d3cc414f9aa8483e2801af1f-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/96db77436bbd428aadcf345ee4cafea4/99fdc5f8a8514a1bb0b2ec186e07bf5cd2e63dc4d3cc414f9aa8483e2801af1f",
+              "spData": "{\"pts\":1,\"lv\":1,\"pcl\":0,\"pnl\":5,\"role\":4}"
+            },
+            "createdAt": "2024-03-27T13:03:29.784292Z",
+            "updatedAt": "2025-08-16T15:58:32.011127Z",
+            "email": "",
+            "firstName": "Kenneth",
+            "lastName": "Crossland"
+          },
+          {
+            "id": "d2ad2e1438bb4b98860f8a8b63b65b8e",
+            "name": "noob",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/d2ad2e1438bb4b98860f8a8b63b65b8e/1e3247b9e3de4af792030ee8332b1a1a0f7b27c6caca4123bbbbcc71f8513ed1-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/d2ad2e1438bb4b98860f8a8b63b65b8e/1e3247b9e3de4af792030ee8332b1a1a0f7b27c6caca4123bbbbcc71f8513ed1",
+              "spData": "{\"pts\":262,\"lv\":5,\"pcl\":155,\"pnl\":515,\"role\":4}"
+            },
+            "createdAt": "2024-01-19T09:43:32.175143Z",
+            "updatedAt": "2025-08-18T01:37:19.886385Z",
+            "email": "",
+            "firstName": "Ryan",
+            "lastName": "Duncan"
+          },
+          {
+            "id": "5643f90c6a924d5ca143556638eb06d2",
+            "name": "joel-julio-1837",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/5643f90c6a924d5ca143556638eb06d2/f16a33af675f4a8cb72840fa8d64a1046d95e7e12c6249808f475ab091d8c499",
+              "pictureProfile": "https://assets.skool.com/f/5643f90c6a924d5ca143556638eb06d2/f16a33af675f4a8cb72840fa8d64a1046d95e7e12c6249808f475ab091d8c499",
+              "spData": "{\"pts\":20,\"lv\":3,\"pcl\":20,\"pnl\":65,\"role\":4}"
+            },
+            "createdAt": "2024-05-27T11:40:29.301232Z",
+            "updatedAt": "2025-08-18T01:24:13.55328Z",
+            "email": "",
+            "firstName": "Joel",
+            "lastName": "Julio"
+          },
+          {
+            "id": "d06b2b4f9bde4b0a94285218291a570c",
+            "name": "dave-snowdon-2108",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/d06b2b4f9bde4b0a94285218291a570c/83b60fab409b4d6b9955c3b06d3efb2ef2e6905f088c41beadb3bd856ed77ba5-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/d06b2b4f9bde4b0a94285218291a570c/83b60fab409b4d6b9955c3b06d3efb2ef2e6905f088c41beadb3bd856ed77ba5-md.jpg",
+              "spData": "{\"pts\":84,\"lv\":4,\"pcl\":65,\"pnl\":155,\"role\":4}"
+            },
+            "createdAt": "2024-12-08T23:32:56.42011Z",
+            "updatedAt": "2025-08-17T07:19:55.215564Z",
+            "email": "",
+            "firstName": "Dave",
+            "lastName": "Snowdon"
+          },
+          {
+            "id": "07692354aaf441bd91504968731c2e8d",
+            "name": "wes-odom-5995",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/07692354aaf441bd91504968731c2e8d/6df776384a9c42f995009189cfa24a7025b895bd9d7a4498a34ffccb65294234-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/07692354aaf441bd91504968731c2e8d/6df776384a9c42f995009189cfa24a7025b895bd9d7a4498a34ffccb65294234",
+              "spData": "{\"pts\":45,\"lv\":3,\"pcl\":20,\"pnl\":65,\"role\":4}"
+            },
+            "createdAt": "2024-11-26T14:52:33.752843Z",
+            "updatedAt": "2025-08-18T01:56:52.17556Z",
+            "email": "",
+            "firstName": "Wes",
+            "lastName": "Odom"
+          },
+          {
+            "id": "56b6f25a1da34b6fb7dc60b02b329bed",
+            "name": "james-blake-6492",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/56b6f25a1da34b6fb7dc60b02b329bed/bc09b0aa6ec04c1d8dec2bb5e88f16c197fcceedf50a4df894e17a81e5af494b-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/56b6f25a1da34b6fb7dc60b02b329bed/bc09b0aa6ec04c1d8dec2bb5e88f16c197fcceedf50a4df894e17a81e5af494b",
+              "spData": "{\"pts\":0,\"lv\":1,\"pcl\":0,\"pnl\":5,\"role\":4}"
+            },
+            "createdAt": "2024-02-03T16:24:43.226634Z",
+            "updatedAt": "2025-08-17T21:59:36.151721Z",
+            "email": "",
+            "firstName": "James",
+            "lastName": "Blake"
+          },
+          {
+            "id": "4f77f5f9b5084c418860bee206c26f93",
+            "name": "patrik-bartok-9314",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/4f77f5f9b5084c418860bee206c26f93/d280b4d58b8c46a4926132e5b768079abacb188527a94188b007d3f339adf285-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/4f77f5f9b5084c418860bee206c26f93/d280b4d58b8c46a4926132e5b768079abacb188527a94188b007d3f339adf285",
+              "spData": "{\"pts\":1,\"lv\":1,\"pcl\":0,\"pnl\":5,\"role\":4}"
+            },
+            "createdAt": "2024-03-06T18:03:03.469976Z",
+            "updatedAt": "2025-08-17T15:51:43.081285Z",
+            "email": "",
+            "firstName": "Patrik",
+            "lastName": "Bartok"
+          },
+          {
+            "id": "63ff89a6fc1e4b5cb921a1897981266e",
+            "name": "graham-whitley-9181",
+            "metadata": {
+              "pictureBubble": "https://assets.skool.com/f/63ff89a6fc1e4b5cb921a1897981266e/7a49ac6d5ec2455499b391cb5d305eea54e0c44e301148fcac24c0f2e74927ad-sm.jpg",
+              "pictureProfile": "https://assets.skool.com/f/63ff89a6fc1e4b5cb921a1897981266e/7a49ac6d5ec2455499b391cb5d305eea54e0c44e301148fcac24c0f2e74927ad",
+              "spData": "{\"pts\":0,\"lv\":1,\"pcl\":0,\"pnl\":5,\"role\":4}"
+            },
+            "createdAt": "2022-12-20T07:24:48.783197Z",
+            "updatedAt": "2025-08-18T01:56:14.251487Z",
+            "email": "",
+            "firstName": "Graham",
+            "lastName": "Whitley"
+          }
+        ]
+      },
+      "isMobile": false,
+      "isApp": false,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "maintenance": {},
+      "currentPage": {
+        "query": {
+          "md": "e667d013dddd4bdfa7f167f66b2ebcc8",
+          "group": "new-society",
+          "course": "f767704b"
+        },
+        "pageKey": "o6z4r8rf2ne92cdp2syb5u",
+        "path": "/new-society/classroom/f767704b",
+        "isPostDetails": false,
+        "isChat": false
+      },
+      "renderData": {
+        "course": {
+          "course": {
+            "id": "1ed5b7f46ac24a94bb9dcca75483ba76",
+            "name": "f767704b",
+            "metadata": {
+              "coverImage": "https://assets.skool.com/f/66584e6240cc45a28d79eb60073d11b1/b0df9edb54aa4aafa084c9d3072358c7365f2f0246f4440e99721f206ddb7d14",
+              "desc": "Learn how to build AI Agents - even if you've never coded before!",
+              "hasAccess": 1,
+              "numModules": 8,
+              "privacy": 0,
+              "title": "Build your first AI Agent"
+            },
+            "createdAt": "2024-03-17T21:50:43.737363Z",
+            "updatedAt": "2025-05-17T16:01:34.10085Z",
+            "unitType": "course",
+            "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+            "userId": "691adfbe67c84406817dea16db13a717",
+            "groupId": "66584e6240cc45a28d79eb60073d11b1",
+            "state": 2,
+            "public": true
+          },
+          "children": [
+            {
+              "course": {
+                "id": "c154c12bfcba4c579656380319fec3d9",
+                "name": "bc7ebd30",
+                "metadata": {
+                  "hasAccess": 1,
+                  "title": "n8n"
+                },
+                "createdAt": "2025-04-19T15:20:55.810311Z",
+                "updatedAt": "2025-04-19T15:20:55.83039Z",
+                "unitType": "set",
+                "parentId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                "userId": "335b9f729273471183939c952e1758b0",
+                "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                "state": 2,
+                "public": true
+              },
+              "children": [
+                {
+                  "course": {
+                    "id": "7d109c26ce3a4846a475ce16bc9679bc",
+                    "name": "cd209974",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "AI Agent in n8n \ud83d\udccc"
+                    },
+                    "createdAt": "2025-02-06T15:06:53.64671Z",
+                    "updatedAt": "2025-05-13T16:34:31.2016Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "691adfbe67c84406817dea16db13a717",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "e667d013dddd4bdfa7f167f66b2ebcc8",
+                    "name": "afbaa92a",
+                    "metadata": {
+                      "desc": "[v2][{\"type\":\"paragraph\"}]",
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "n8n Basics"
+                    },
+                    "createdAt": "2025-04-19T15:22:38.013833Z",
+                    "updatedAt": "2025-04-19T15:23:04.687709Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "335b9f729273471183939c952e1758b0",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "21bf72470a3f44789162f2a12ea444f7",
+                    "name": "0d166c0d",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "Connect your Google credentials"
+                    },
+                    "createdAt": "2025-04-24T08:16:36.179778Z",
+                    "updatedAt": "2025-04-24T08:17:09.728743Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "335b9f729273471183939c952e1758b0",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "f08bb63041f34e01ab30afb23067f9cd",
+                    "name": "4f5977fe",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "title": "Create a RAG System"
+                    },
+                    "createdAt": "2025-04-28T19:55:11.748106Z",
+                    "updatedAt": "2025-04-28T19:57:29.467685Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "335b9f729273471183939c952e1758b0",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "bb5833723f8f46b7b7db77dfd55cf3f2",
+                    "name": "6a811253",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "AI Agent or Automation?"
+                    },
+                    "createdAt": "2025-05-02T19:59:19.20084Z",
+                    "updatedAt": "2025-05-02T19:59:28.969534Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "335b9f729273471183939c952e1758b0",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "e48181bc695e42e0987419baa3cd6a4b",
+                    "name": "449c5a40",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "Using Webhooks"
+                    },
+                    "createdAt": "2025-05-08T20:11:22.586541Z",
+                    "updatedAt": "2025-05-08T20:11:32.541549Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "335b9f729273471183939c952e1758b0",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "2e0e50c923104f0693472f4c338724b2",
+                    "name": "7ccf0570",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "Create Sub-Agents"
+                    },
+                    "createdAt": "2025-05-13T17:52:23.996684Z",
+                    "updatedAt": "2025-05-13T17:52:57.300176Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "c0e40938d5ee4749a2cdddf14fb2013c",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                },
+                {
+                  "course": {
+                    "id": "64cf1afe5f2649e1b5aa31b1e1176fd5",
+                    "name": "bb70c660",
+                    "metadata": {
+                      "hasAccess": 1,
+                      "resources": "[]",
+                      "title": "How to solve problems?"
+                    },
+                    "createdAt": "2025-05-17T16:01:34.0334Z",
+                    "updatedAt": "2025-05-17T16:02:32.654202Z",
+                    "unitType": "module",
+                    "parentId": "c154c12bfcba4c579656380319fec3d9",
+                    "rootId": "1ed5b7f46ac24a94bb9dcca75483ba76",
+                    "userId": "c0e40938d5ee4749a2cdddf14fb2013c",
+                    "groupId": "66584e6240cc45a28d79eb60073d11b1",
+                    "state": 2,
+                    "public": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "pinnedPosts": [
+          {
+            "post": {
+              "id": "5018f20b5ed140ef86a5d4acd9641803",
+              "name": "new-module-n8n-basics",
+              "metadata": {
+                "action": 0,
+                "attachmentsEdit": 1745077951366454800,
+                "comments": 16,
+                "content": "This video is exclusive to the New Society\n\nIn this module, you will learn how to create an automation and use the basic flow nodes\n\nThis will be the first module in a new series of modules",
+                "contentEdit": 1745077951366454800,
+                "contributors": "[{\"id\":\"691adfbe67c84406817dea16db13a717\",\"name\":\"davidondrej\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/691adfbe67c84406817dea16db13a717/d17f00aa2c7445628642eb488c3dcca248f95c1c549947fbb0e7f28919010ff5\"},\"created_at\":\"2024-01-26T20:35:35.5109Z\",\"updated_at\":\"2025-06-03T07:36:18.797356Z\",\"email\":\"\",\"first_name\":\"David\",\"last_name\":\"Ondrej\"},{\"id\":\"8f8168810b9c45df96e0a8ecd3c7fdb9\",\"name\":\"46598913\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/8f8168810b9c45df96e0a8ecd3c7fdb9/14430051768349478f6f50db231c60682bc0742969d44a259435d7e899c0f739-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/8f8168810b9c45df96e0a8ecd3c7fdb9/14430051768349478f6f50db231c60682bc0742969d44a259435d7e899c0f739\"},\"created_at\":\"2024-01-30T22:06:31.434009Z\",\"updated_at\":\"2025-06-02T15:36:34.218547Z\",\"email\":\"\",\"first_name\":\"J\",\"last_name\":\"J\"},{\"id\":\"80c1db06b4804c32a8d4bcd1ef74d854\",\"name\":\"donovan-brown-9270\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/80c1db06b4804c32a8d4bcd1ef74d854/f361057f117c4ef6885bf46b394c5b3836f9f0407e2c47468a3992e0e2f7b389-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/80c1db06b4804c32a8d4bcd1ef74d854/f361057f117c4ef6885bf46b394c5b3836f9f0407e2c47468a3992e0e2f7b389-md.jpg\"},\"created_at\":\"2024-12-24T03:28:42.611823Z\",\"updated_at\":\"2025-06-03T05:15:10.924389Z\",\"email\":\"\",\"first_name\":\"Donovan\",\"last_name\":\"Brown\"},{\"id\":\"17335f906ab24322aad8faebd78c459d\",\"name\":\"ross-beatty-4722\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/17335f906ab24322aad8faebd78c459d/7262f704c3984d98b78419e9adb36e4a97ebf670f3c249d29329a42856ad894b-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/17335f906ab24322aad8faebd78c459d/7262f704c3984d98b78419e9adb36e4a97ebf670f3c249d29329a42856ad894b-md.jpg\"},\"created_at\":\"2025-03-26T21:13:36.896545Z\",\"updated_at\":\"2025-06-03T03:45:55.213863Z\",\"email\":\"\",\"first_name\":\"Ross\",\"last_name\":\"Beatty\"},{\"id\":\"aa97aa0aefed477898be91276fa1ca05\",\"name\":\"marco-talladira-3969\",\"metadata\":{\"picture_bubble\":\"https://assets.skool.com/f/aa97aa0aefed477898be91276fa1ca05/09666120a26e4a4ea63e8da8b066a9f80682c13af4844cafb025f52acadcefe0-sm.jpg\",\"picture_profile\":\"https://assets.skool.com/f/aa97aa0aefed477898be91276fa1ca05/09666120a26e4a4ea63e8da8b066a9f80682c13af4844cafb025f52acadcefe0-md.jpg\"},\"created_at\":\"2025-05-09T21:32:53.79303Z\",\"updated_at\":\"2025-06-03T08:02:12.493029Z\",\"email\":\"\",\"first_name\":\"Marco\",\"last_name\":\"Talladira\"}]",
+                "imagePreview": "https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540",
+                "imagePreviewSmall": "https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540",
+                "labels": "eecfb4638bea48699127d210204d5887",
+                "lastComment": 1748937772625785000,
+                "lastCommentId": "b6c9fb5ff3ec4488afda92e05cb0592b",
+                "lastCommentView": 1748937772625785000,
+                "myView": 1755481722685835500,
+                "pinnedModule": "e667d013dddd4bdfa7f167f66b2ebcc8",
+                "rca": "2|1748937772625785000",
+                "title": "\ud83d\udd25 NEW MODULE: n8n basics",
+                "titleEdit": 1745077951366454800,
+                "upvotes": 23,
+                "videoLinks": "https://ondrejdavidbusiness.wistia.com/medias/3qsmpupw97",
+                "videoLinksData": "[{\"url\":\"https://ondrejdavidbusiness.wistia.com/medias/3qsmpupw97\",\"provider\":4,\"video_id\":\"3qsmpupw97\",\"thumbnail\":\"https://embed-ssl.wistia.com/deliveries/c2f0e6862a41390ce99a82f8d3fbd854db5823b6.jpg?image_crop_resized=960x540\",\"len_ms\":645500,\"title\":\"n8n_fundamentals\"}]",
+                "videoLinksEdit": 1745077951366454800
+              },
+              "createdAt": "2025-04-19T15:29:28.429057Z",
+              "updatedAt": "2025-06-19T22:06:39.906654Z",
+              "groupId": "66584e6240cc45a28d79eb60073d11b1",
+              "userId": "335b9f729273471183939c952e1758b0",
+              "postType": "generic",
+              "rootId": "5018f20b5ed140ef86a5d4acd9641803",
+              "labelId": "eecfb4638bea48699127d210204d5887",
+              "user": {
+                "id": "335b9f729273471183939c952e1758b0",
+                "name": "maty",
+                "metadata": {
+                  "bio": "Student - Sports - Interested in AI",
+                  "lastOffline": 1755350207852774100,
+                  "linkFacebook": "",
+                  "linkInstagram": "",
+                  "linkLinkedin": "",
+                  "linkTwitter": "",
+                  "linkWebsite": "",
+                  "linkYoutube": "",
+                  "location": "Czech Republic",
+                  "myersBriggs": "INFJ",
+                  "pictureBubble": "https://assets.skool.com/f/335b9f729273471183939c952e1758b0/4ce86b35a79c4290a6544198c62d72cf2ba25dd79f8649beb2426df8a8eed7b3-sm.jpg",
+                  "pictureProfile": "https://assets.skool.com/f/335b9f729273471183939c952e1758b0/4ce86b35a79c4290a6544198c62d72cf2ba25dd79f8649beb2426df8a8eed7b3",
+                  "spData": "{\"pts\":3143,\"lv\":7,\"pcl\":2015,\"pnl\":8015,\"role\":2}"
+                },
+                "createdAt": "2024-01-26T18:30:37.78863Z",
+                "updatedAt": "2025-08-18T01:19:39.454744Z",
+                "email": "",
+                "firstName": "Maty",
+                "lastName": "Matyk"
+              }
+            }
+          }
+        ]
+      },
+      "referer": "",
+      "host": "www.skool.com",
+      "growthBookData": {
+        "features": {
+          "enable_single_page_sign_up": {
+            "defaultValue": false
+          },
+          "enable_in_app_signup": {
+            "defaultValue": false,
+            "rules": [
+              {
+                "force": true
+              }
+            ]
+          },
+          "enable_native_video": {
+            "defaultValue": false,
+            "rules": [
+              {
+                "force": true
+              }
+            ]
+          },
+          "native_video_polling": {
+            "defaultValue": false,
+            "rules": [
+              {
+                "force": true
+              }
+            ]
+          },
+          "enable_hormozi_signup_flow": {
+            "defaultValue": true,
+            "rules": [
+              {
+                "condition": {
+                  "id": {
+                    "$in": [
+                      "59e737d659f24e69a3810c6191054efd",
+                      "715c646a7e2b43f88a2baa4eb2e05846",
+                      "37c30ea54af04a1190f0e490acf0db23",
+                      "c6f5b5c1adf345058c3066466b508842",
+                      "d4cdf267db0645f285e8ff970afe8e34",
+                      "da77b6ca714e45288cb042397d612fb0",
+                      "e2ee54171fa144f69bf57fc97e06c787",
+                      "d4067807f9d94db4bb2fbbbe9ff83354",
+                      "cdceafd9284444cd9e13eb86181b04cc",
+                      "0200fb0e33ef49ed84959d5deddd232a",
+                      "d4f44bfb2d0d4a658792798b3562693d",
+                      "1ad1513cd0bc44bb89cd5f9f708740f8",
+                      "07ed20a7767b4383b51554e6f4275106",
+                      "4e10fe811d81474fb3f5dea2fa5dbf04",
+                      "23eb6e10c1ac48538211e2ca80b4339a",
+                      "1c43a2d3d37946af9ac73648e0001bfe",
+                      "c765f4bfc3684a6ba778bc19a91b94d2",
+                      "6a42cce1cf2446aeb982c90d683b997f",
+                      "152a366a666147ab8e2f2f208945d383",
+                      "213c8558384c45f486a9e07f2968df85",
+                      "4e32b14d7b64402b843a35a885aa88b1",
+                      "82c5dd94645e472d90c9b1bb056fff92",
+                      "28c2a2fbb80247f0a31ede3c9bb7cc6f",
+                      "e89974b27ae245cea68d3ccc4e228ace",
+                      "6d62c4a253344c03b307d0cab5a2a135",
+                      "f7fd2ac7f603458687c2f784e338b85b",
+                      "77fe639bca8040c5b986a699638f2b39",
+                      "ada848a34f594684868979430cf9ffb4",
+                      "85eb52dbe8aa4cf9829373c9e3ac52aa",
+                      "70f956d431d942b0abe1fe9e21dbfc1a",
+                      "d421c55ca87840f29e4ff00a4ab84000",
+                      "dbb101fbd0ec4ab3b107c81598d0f7db",
+                      "d9c536f7828543288f6e761236af7860",
+                      "ff9df4e104c7400b814e8940e7308ecd"
+                    ]
+                  }
+                },
+                "force": true
+              }
+            ]
+          },
+          "hormozi_promo_end_date": {
+            "defaultValue": 1756018799000
+          },
+          "hormozi_aug_2025_days_90_enabled": {
+            "defaultValue": true
+          },
+          "hormozi_aug_2025_days_14_enabled": {
+            "defaultValue": false
+          },
+          "enable_signup_payments_form_v2": {
+            "defaultValue": true,
+            "rules": [
+              {
+                "condition": {
+                  "id": {
+                    "$in": [
+                      "59e737d659f24e69a3810c6191054efd",
+                      "715c646a7e2b43f88a2baa4eb2e05846",
+                      "37c30ea54af04a1190f0e490acf0db23",
+                      "c6f5b5c1adf345058c3066466b508842",
+                      "d4cdf267db0645f285e8ff970afe8e34",
+                      "da77b6ca714e45288cb042397d612fb0",
+                      "e2ee54171fa144f69bf57fc97e06c787",
+                      "d4067807f9d94db4bb2fbbbe9ff83354",
+                      "cdceafd9284444cd9e13eb86181b04cc",
+                      "0200fb0e33ef49ed84959d5deddd232a",
+                      "d4f44bfb2d0d4a658792798b3562693d",
+                      "1ad1513cd0bc44bb89cd5f9f708740f8",
+                      "07ed20a7767b4383b51554e6f4275106",
+                      "4e10fe811d81474fb3f5dea2fa5dbf04",
+                      "23eb6e10c1ac48538211e2ca80b4339a",
+                      "1c43a2d3d37946af9ac73648e0001bfe",
+                      "c765f4bfc3684a6ba778bc19a91b94d2",
+                      "6a42cce1cf2446aeb982c90d683b997f",
+                      "152a366a666147ab8e2f2f208945d383",
+                      "213c8558384c45f486a9e07f2968df85",
+                      "4e32b14d7b64402b843a35a885aa88b1",
+                      "82c5dd94645e472d90c9b1bb056fff92",
+                      "28c2a2fbb80247f0a31ede3c9bb7cc6f",
+                      "e89974b27ae245cea68d3ccc4e228ace",
+                      "6d62c4a253344c03b307d0cab5a2a135",
+                      "f7fd2ac7f603458687c2f784e338b85b",
+                      "77fe639bca8040c5b986a699638f2b39",
+                      "ada848a34f594684868979430cf9ffb4",
+                      "85eb52dbe8aa4cf9829373c9e3ac52aa",
+                      "70f956d431d942b0abe1fe9e21dbfc1a",
+                      "d421c55ca87840f29e4ff00a4ab84000",
+                      "dbb101fbd0ec4ab3b107c81598d0f7db",
+                      "d9c536f7828543288f6e761236af7860",
+                      "ff9df4e104c7400b814e8940e7308ecd"
+                    ]
+                  }
+                },
+                "force": true
+              }
+            ]
+          },
+          "enable_hormozi_payments_form_v2": {
+            "defaultValue": false,
+            "rules": [
+              {
+                "force": true
+              }
+            ]
+          },
+          "enable_signup_headline_change": {
+            "defaultValue": false,
+            "rules": [
+              {
+                "coverage": 1,
+                "hashAttribute": "clientId",
+                "seed": "2c82bec4-2898-4c7f-b491-ba87d905764c",
+                "hashVersion": 2,
+                "force": true
+              }
+            ]
+          },
+          "enable_free_trial_text": {
+            "defaultValue": false
+          }
+        },
+        "experiments": []
+      },
+      "env": {
+        "ENV": "prod",
+        "CLIENT_ID_KEY": "client_id",
+        "API_URL": "https://api.skool.com",
+        "PUBSUB_URL": "wss://groups-ps.skool.com/ws",
+        "FACEBOOK_APP_ID": "2759137094103591",
+        "STRIPE_PUBLISHABLE_KEY": "pk_live_51IMiS6KvLOXsN9xSfc0bsCmz4p06QORdboo8MvJtjVBv2pnTKbysGEMu331uhK1cw2RRGMiLgAGCPfjDVJs30aLn00ui4Q8VEn",
+        "BILLING_STRIPE_PUBLISHABLE_KEY": "pk_live_51Msq2SK2xk1aF7GmLfdnbGQwTp0k2kt23vSuMyDBouKfriqp9W52yocwbPK72oXs5LtVsFYqiJ0oMfXouhXZMFSu00T7SlnP47",
+        "GIPHY_KEY": "eTYZVZGLxZxgS3w15EgAx6IgBwalxCoz",
+        "FB_PIXEL_ID": "377423971634690",
+        "TELEMETRY_URL": "https://ct.skool.com",
+        "DISCOVERY_API_URL_PUBLIC": "https://disc-api.skool.com"
+      }
+    },
+    "__N_SSP": true
+  },
+  "page": "/[group]/classroom/[course]",
+  "query": {
+    "md": "e667d013dddd4bdfa7f167f66b2ebcc8",
+    "group": "new-society",
+    "course": "f767704b"
+  },
+  "buildId": "1755198766776",
+  "isFallback": false,
+  "isExperimentalCompile": false,
+  "gssp": true,
+  "appGip": true,
+  "scriptLoader": []
+}

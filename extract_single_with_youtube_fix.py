@@ -335,6 +335,14 @@ def detect_platform(video_url):
     
     url_lower = video_url.lower()
     
+    # Filter out image URLs
+    if any(img_ext in url_lower for img_ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp']):
+        return 'unknown'
+    
+    # Filter out thumbnail URLs with image_crop parameters
+    if 'image_crop' in url_lower or 'thumbnail' in url_lower:
+        return 'unknown'
+    
     if 'youtube.com' in url_lower or 'youtu.be' in url_lower:
         return 'youtube'
     elif 'vimeo.com' in url_lower:
@@ -356,6 +364,20 @@ def clean_video_url(video_url, platform):
     if platform == 'youtube':
         # Extract video ID from various YouTube URL formats
         import re
+        from urllib.parse import urlparse, parse_qs, unquote
+        
+        # Handle oEmbed URLs that wrap the real video URL in ?url=
+        if 'youtube.com/oembed' in video_url:
+            try:
+                parsed = urlparse(video_url)
+                q = parse_qs(parsed.query)
+                wrapped = q.get('url', [None])[0]
+                if wrapped:
+                    wrapped = unquote(wrapped)
+                    # Recursively clean the wrapped URL
+                    return clean_video_url(wrapped, 'youtube')
+            except Exception:
+                pass
         
         # Handle embed URLs: https://www.youtube.com/embed/Ch-AWxvX2Jc?params...
         embed_match = re.search(r'youtube\.com/embed/([a-zA-Z0-9_-]{11})', video_url)
@@ -427,7 +449,30 @@ def extract_from_next_data(driver):
         if lesson:
             print("🔍 Found lesson data, checking multiple video paths...")
             
-            # Method 1: Check lesson.video.video_url (original method)
+            # Method 1: Check videoLinksData (NEW - contains actual video URLs)
+            video_links_data = lesson.get("videoLinksData")
+            if video_links_data:
+                try:
+                    # Parse the JSON string in videoLinksData
+                    video_links = json.loads(video_links_data)
+                    if isinstance(video_links, list) and len(video_links) > 0:
+                        video_info = video_links[0]  # Get first video
+                        video_url = video_info.get("url")
+                        if video_url:
+                            platform = detect_platform(video_url)
+                            clean_url = clean_video_url(video_url, platform)
+                            result = {
+                                'url': clean_url,
+                                'platform': platform,
+                                'thumbnail': video_info.get("thumbnail"),
+                                'duration': video_info.get("len_ms")
+                            }
+                            print(f"✅ Found {platform} video in videoLinksData: {clean_url}")
+                            return result
+                except (json.JSONDecodeError, KeyError) as e:
+                    print(f"⚠️ Error parsing videoLinksData: {e}")
+            
+            # Method 2: Check lesson.video.video_url (original method)
             video_data = lesson.get("video", {})
             video_url = video_data.get("video_url")
             if video_url:
@@ -442,7 +487,7 @@ def extract_from_next_data(driver):
                 print(f"✅ Found {platform} video in lesson.video: {clean_url}")
                 return result
             
-            # Method 2: Check lesson.metadata.videoLink (alternative path)
+            # Method 3: Check lesson.metadata.videoLink (alternative path)
             metadata = lesson.get("metadata", {})
             video_link = metadata.get("videoLink")
             if video_link:
@@ -457,13 +502,16 @@ def extract_from_next_data(driver):
                 print(f"✅ Found {platform} video in lesson.metadata: {clean_url}")
                 return result
             
-            # Method 3: Search for any URL-like patterns in lesson data
+            # Method 4: Search for any URL-like patterns in lesson data
             def find_video_urls_in_object(obj, path=""):
                 video_urls = []
                 if isinstance(obj, dict):
                     for key, value in obj.items():
                         current_path = f"{path}.{key}" if path else key
-                        if isinstance(value, str) and any(domain in value.lower() for domain in ['youtube.com', 'youtu.be', 'vimeo.com', 'loom.com', '.mp4', '.webm']):
+                        if isinstance(value, str) and any(domain in value.lower() for domain in ['youtube.com', 'youtu.be', 'vimeo.com', 'loom.com', 'wistia.com', '.mp4', '.webm']):
+                            # Skip thumbnail images
+                            if '.jpg' in value.lower() or '.png' in value.lower() or 'image_crop' in value.lower():
+                                continue
                             video_urls.append((current_path, value))
                         elif isinstance(value, (dict, list)):
                             video_urls.extend(find_video_urls_in_object(value, current_path))
@@ -1397,8 +1445,10 @@ def extract_video_two_step_click(driver):
         print(f"❌ Error in two-step click workflow: {str(e)}")
         return None
 
-def extract_video_url_universal(driver):
-    """Enhanced video extraction supporting multiple platforms (YouTube, Vimeo, etc.)"""
+def extract_video_url_universal(driver, use_all_methods=False):
+    """Enhanced video extraction supporting multiple platforms (YouTube, Vimeo, etc.)
+    If use_all_methods is True, also attempt the two-step click workflow.
+    """
     
     # Method 1: JSON data extraction (most reliable)
     video_data = extract_from_next_data(driver)
@@ -1416,12 +1466,21 @@ def extract_video_url_universal(driver):
     if video_data:
         return video_data
     
-    # Method 3: Two-step click workflow (DISABLED - causes page redirects)
-    print("🔍 Skipping two-step click workflow (causes redirects)...")
-    # video_data = extract_video_two_step_click(driver)
-    # if video_data:
-    #     return video_data
+    # Method 3: Two-step click workflow (optional aggressive mode)
+    if use_all_methods:
+        print("🔍 Aggressive mode: trying two-step click workflow...")
+        video_data = extract_video_two_step_click(driver)
+        if video_data:
+            return video_data
+    else:
+        print("🔍 Skipping two-step click workflow (aggressive mode disabled)...")
     
+    # Method 3.5: Network logs inspection (capture HLS/MP4 or hidden player requests)
+    print("🔍 Inspecting network logs for media URLs...")
+    network_video = extract_video_from_network_logs(driver)
+    if network_video:
+        return network_video
+
     # Method 4: Fallback to original YouTube extraction for backward compatibility
     print("🔄 Falling back to original YouTube extraction...")
     youtube_url = extract_youtube_url_legacy(driver)
@@ -1434,6 +1493,64 @@ def extract_video_url_universal(driver):
         }
     
     print("⚠️ No video found using any method")
+    return None
+
+def extract_video_from_network_logs(driver):
+    """Inspect Chrome performance logs for media URLs (mp4, m3u8, known platforms)."""
+    try:
+        # Fetch performance logs
+        logs = []
+        try:
+            logs = driver.get_log('performance')
+        except Exception:
+            pass
+
+        def _is_probable_video_url(url: str) -> bool:
+            u = (url or '').lower()
+            # Exclude common image assets
+            if any(u.endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']):
+                return False
+            # Accept direct media files or HLS
+            if any(ext in u for ext in ['.m3u8', '.mp4', '.webm', '.mov']):
+                return True
+            # Accept known player/embeds
+            if ('youtube.com' in u or 'youtu.be' in u or 'vimeo.com' in u or 'loom.com' in u or
+                'fast.wistia.net/embed/iframe/' in u or 'wistia.com/medias/' in u or 'oembed?format=json&url=' in u):
+                return True
+            # Exclude Wistia delivery images
+            if 'wistia' in u and 'deliveries' in u:
+                return False
+            return False
+
+        candidates = []
+        for entry in logs:
+            try:
+                msg = json.loads(entry.get('message', '{}'))
+                params = msg.get('message', {}).get('params', {})
+                request = params.get('request', {})
+                response = params.get('response', {})
+                url = request.get('url') or response.get('url')
+                if not url:
+                    continue
+                if _is_probable_video_url(url):
+                    candidates.append(url)
+            except Exception:
+                continue
+
+        # Prefer direct media first, then platform URLs
+        prioritized = sorted(candidates, key=lambda u: (('m3u8' not in u and '.mp4' not in u), len(u)))
+        if prioritized:
+            best = prioritized[0]
+            platform = detect_platform(best)
+            clean_url = clean_video_url(best, platform)
+            print(f"✅ Found media via network logs: {clean_url}")
+            return {
+                'url': clean_url,
+                'platform': platform,
+                'source': 'network_logs'
+            }
+    except Exception as e:
+        print(f"⚠️ Network log inspection failed: {e}")
     return None
 
 def extract_youtube_url_legacy(driver):
@@ -1827,8 +1944,8 @@ def main():
         if not lesson_name:
             lesson_name = "Untitled Lesson - " + datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         
-        # Extract video with universal detection
-        video_data = extract_video_url_universal(driver)
+        # Extract video with universal detection (aggressive all-methods mode)
+        video_data = extract_video_url_universal(driver, use_all_methods=True)
         
         # Extract content
         content = extract_content(driver)
@@ -1851,6 +1968,9 @@ def main():
 def offer_cleanup():
     """Offer cleanup option before starting extraction"""
     try:
+        # Allow CI/non-interactive runs to skip prompts
+        if os.getenv("SKIP_CLEANUP_PROMPT", "").strip() == "1":
+            return True
         from pathlib import Path
         communities_dir = Path.cwd() / "Communities"
         
